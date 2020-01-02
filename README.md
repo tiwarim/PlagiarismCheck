@@ -1,6 +1,6 @@
 # Plagiarism Check
 
-This is a Restful API that uses pretrained Natural Language Procesing model called Spacy to compute pairwise similarity ratio between two documents. This allows user to register for the API using a unique username and password. With each registration, a user gets 6 free tokens. User calls the API giving his username, password and the two documents as string and gets back the similarity ratio. Each transcation costs the user 1 token and he has option to refill the tokens by paying for it. When Admin receives tghe pay, he call the API giving username, Admin password and the refill amount. The user now has sum of existing tokens and the refill amount. 
+This is a Restful API that uses pretrained Natural Language Procesing model called Spacy to compute pairwise similarity ratio between two documents. This allows user to register for the API using a unique username and password. With each registration, a user gets 6 free tokens. User calls the API giving his username, password and the two documents as string and gets back the similarity ratio. Each transcation costs the user 1 token and he has option to refill the tokens by paying for it. When Admin receives tghe pay, he call the API giving username, Admin password and the refill amount. The user now has sum of existing tokens and the refill amount. The API is hosted on AWS with host url "ec2-18-224-246-224.us-east-2.compute.amazonaws.com:8000/"
 
 ## Getting Started
 
