@@ -1,0 +1,96 @@
+
+<html>
+
+    <head>
+        <title> Testing the call </title>
+        <meta charset="UTF-8">
+
+        <script>
+        function createCorsRequest(method, url){
+            var xhr = new XMLHttpRequest();
+            if("withCredentials" in xhr){
+                xhr.open(method, url, true);
+            } else if (typeof xDomaiRequest != "undefined"){
+                xhr = new xDomaiRequest();
+                xhr.open(method, url);
+            } else{
+                xhr = null;
+            }
+            return xhr;
+        }
+        
+        function makeCorsRequest(str1, str2){
+            var url = "https://cors-anywhere.herokuapp.com/ec2-3-134-81-255.us-east-2.compute.amazonaws.com:8000/detect";
+            var xhr = createCorsRequest('POST', url)
+            const inJson = {
+                            "username" : "user56" ,
+                             "password" : "12345" ,
+                             "text1" : str1,
+                             "text2" : str2
+                             };
+            const jsonS = JSON.stringify(inJson);
+            if(!xhr){
+                alert('CORS not supported');
+                return;
+            }
+            xhr.onload = function(){
+                var text = xhr.responseText;
+              //  alert('Response from Cors requestt')
+            };
+            xhr.onerror = function(){
+                alert('There is an error in calling');
+            };
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            ////////////////
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                var out = JSON.parse(xhr.responseText);
+                var main = "";
+                var tbltop = `<table>
+                                <tr><th>Message</th><th>Ratio</th><th>Status Code</th></tr>`;
+                
+                    main += "<tr><td>"+out.message+"</td><td>"+out["similarity ratio"]+"</td><td>"+out.statuscode+"</td></tr>";
+                
+                var tblbottom = "</table>";
+                var tbl = tbltop + main + tblbottom;
+                document.getElementById("div").innerHTML = tbl;
+                // alert(out.message);
+                }
+            };
+            /////////////////
+            xhr.send(jsonS);
+            
+        }
+        window.onload = function(){
+            makeCorsRequest();
+        }
+
+        // sender fnc that takes inputs from the form and calls the api backedn
+        function send(){
+            var text1 = document.getElementById("form").fname.value;
+            var text2 = document.getElementById("form").lname.value;
+            makeCorsRequest(text1, text2);
+        }
+
+
+        </script>
+    </head>
+
+    <body>
+        <h1> Plagiarism Check</h1>
+        <form id="form"> 
+                <label for="fname"> <b> Text1: </b></label>
+                <input type="text" id="fname" name="fname"><br>
+                
+                <label for="lname"><b> Text2: </b></label>
+                <input type="text" id="lname" name="lname"><br>
+                
+                <input type="button" onclick="javascript:send()" value="Submit">
+            </form>
+            <body id='bod'><button type="submit" onclick="javascript:makeCorsRequest('Hello', 'Hello')">call</button>
+        <div id='div'> </div>
+
+    </body>
+</html>
+
