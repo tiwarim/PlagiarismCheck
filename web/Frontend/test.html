@@ -21,8 +21,64 @@
         }
 
         /////////////////////////////////////////////////////
-        // function that calls for Check  
-        function makeCorsRequest(uname, pass, str1, str2){
+        // function that calls for Register
+        function makeCorsRequestRegister(uname, pass){
+            var url = "https://cors-anywhere.herokuapp.com/ec2-3-134-81-255.us-east-2.compute.amazonaws.com:8000/register";
+            var xhr = createCorsRequest('POST', url)
+            const inJson = {
+                            "username" : uname ,
+                             "password" : pass 
+                             };
+            const jsonS = JSON.stringify(inJson);
+            if(!xhr){
+                alert('CORS not supported');
+                return;
+            }
+            xhr.onload = function(){
+                var text = xhr.responseText;
+              //  alert('Response from Cors requestt')
+            };
+            xhr.onerror = function(){
+                alert('There is an error in calling');
+            };
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                var out = JSON.parse(xhr.responseText);
+                var main = "";
+                var tbltop = `<table>
+                                <tr><th>Message</th><th>Status Code</th></tr>`;
+                
+                    main += "<tr><td>"+out.message+"</td><td>"+out.statuscode+"</td></tr>";
+                
+                var tblbottom = "</table>";
+                var tbl = tbltop + main + tblbottom;
+                document.getElementById("register").innerHTML = tbl;
+                // alert(out.message);
+                }
+            };
+            
+            xhr.send(jsonS);
+            
+        }
+
+        // sender fnc that takes inputs from the form and calls the api backedn
+        function Registersend(){
+            var username = document.getElementById("RegisterForm").username.value;
+            var password = document.getElementById("RegisterForm").password.value;
+
+            
+            makeCorsRequestRegister(username, password);
+        }
+        /////////////////////////////////////////////
+
+
+
+
+        /////////////////////////////////////////////////////
+        // function that calls for Check
+        function makeCorsRequestCheck(uname, pass, str1, str2){
             var url = "https://cors-anywhere.herokuapp.com/ec2-3-134-81-255.us-east-2.compute.amazonaws.com:8000/detect";
             var xhr = createCorsRequest('POST', url)
             const inJson = {
@@ -56,16 +112,13 @@
                 
                 var tblbottom = "</table>";
                 var tbl = tbltop + main + tblbottom;
-                document.getElementById("div").innerHTML = tbl;
+                document.getElementById("check").innerHTML = tbl;
                 // alert(out.message);
                 }
             };
             
             xhr.send(jsonS);
             
-        }
-        window.onload = function(){
-            makeCorsRequest();
         }
 
         // sender fnc that takes inputs from the form and calls the api backedn
@@ -75,11 +128,63 @@
 
             var text1 = document.getElementById("CheckForm").text1.value;
             var text2 = document.getElementById("CheckForm").text2.value;
-            makeCorsRequest(username, password, text1, text2);
+            makeCorsRequestCheck(username, password, text1, text2);
         }
-
         /////////////////////////////////////////////
 
+        /////////////////////////////////////////////////////
+        // function that calls for Refill
+        function makeCorsRequestRefill(username, admin_pass, amt){
+            var url = "https://cors-anywhere.herokuapp.com/ec2-3-134-81-255.us-east-2.compute.amazonaws.com:8000/refill";
+            var xhr = createCorsRequest('POST', url)
+            const inJson = {
+                            "username" : username ,
+                             "admin_password" : admin_pass ,
+                             "refill_amt" : Number(amt)
+                             };
+            const jsonS = JSON.stringify(inJson);
+            if(!xhr){
+                alert('CORS not supported');
+                return;
+            }
+            xhr.onload = function(){
+                var text = xhr.responseText;
+              //  alert('Response from Cors requestt')
+            };
+            xhr.onerror = function(){
+                alert('There is an error in calling');
+            };
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                var out = JSON.parse(xhr.responseText);
+                var main = "";
+                var tbltop = `<table>
+                                <tr><th>Message</th><th>Status Code</th></tr>`;
+                
+                    main += "<tr><td>"+out.message+"</td><td>"+out.statuscode+"</td></tr>";
+                
+                var tblbottom = "</table>";
+                var tbl = tbltop + main + tblbottom;
+                document.getElementById("refill").innerHTML = tbl;
+                // alert(out.message);
+                }
+            };
+            
+            xhr.send(jsonS);
+            
+        }
+
+        // sender fnc that takes inputs from the form and calls the api backedn
+        function Refillsend(){
+            var username = document.getElementById("RegisterForm").username.value;
+            var admin_password = document.getElementById("RefillForm").admin_password.value;
+            const refill_amt = document.getElementById("RefillForm").refill_amt.value;
+            
+            makeCorsRequestRefill(username, admin_password, refill_amt);
+        }
+        /////////////////////////////////////////////
 
         </script>
     </head>
@@ -96,8 +201,9 @@
                 <label ><b> Password: </b></label>
                 <input type="text" name="password"><br>
                 
-                <input type="button"  value="Submit">
+                <input type="button" onclick="javascript:Registersend()" value="Submit">
             </form>
+        <div id='register'> </div>
 
 
 
@@ -112,7 +218,20 @@
                 
                 <input type="button" onclick="javascript:Checksend()" value="Submit">
             </form>
-        <div id='div'> </div>
+        <div id='check'> </div>
+
+
+        <h2> Refill</h2>
+        <form id="RefillForm"> 
+                <label ><b> Admin Password: </b></label>
+                <input type="text" name="admin_password"><br>
+
+                <label ><b> Refill Amount: </b></label>
+                <input type="number" name="refill_amt"><br>
+                
+                <input type="button" onclick="javascript:Refillsend()" value="Submit">
+            </form>
+        <div id='refill'> </div>
 
     </body>
 </html>
