@@ -1,11 +1,12 @@
 
 <html>
-
     <head>
         <title> Testing the call </title>
         <meta charset="UTF-8">
 
         <script>
+        
+        // function to create a CORS complaint http request 
         function createCorsRequest(method, url){
             var xhr = new XMLHttpRequest();
             if("withCredentials" in xhr){
@@ -18,13 +19,15 @@
             }
             return xhr;
         }
-        
-        function makeCorsRequest(str1, str2){
+
+        /////////////////////////////////////////////////////
+        // function that calls for Check  
+        function makeCorsRequest(uname, pass, str1, str2){
             var url = "https://cors-anywhere.herokuapp.com/ec2-3-134-81-255.us-east-2.compute.amazonaws.com:8000/detect";
             var xhr = createCorsRequest('POST', url)
             const inJson = {
-                            "username" : "user56" ,
-                             "password" : "12345" ,
+                            "username" : uname ,
+                             "password" : pass ,
                              "text1" : str1,
                              "text2" : str2
                              };
@@ -42,7 +45,6 @@
             };
             xhr.setRequestHeader("Content-Type", "application/json");
 
-            ////////////////
             xhr.onreadystatechange = function(){
                 if(xhr.readyState == 4 && xhr.status == 200){
                 var out = JSON.parse(xhr.responseText);
@@ -58,7 +60,7 @@
                 // alert(out.message);
                 }
             };
-            /////////////////
+            
             xhr.send(jsonS);
             
         }
@@ -67,11 +69,16 @@
         }
 
         // sender fnc that takes inputs from the form and calls the api backedn
-        function send(){
-            var text1 = document.getElementById("form").fname.value;
-            var text2 = document.getElementById("form").lname.value;
-            makeCorsRequest(text1, text2);
+        function Checksend(){
+            var username = document.getElementById("RegisterForm").username.value;
+            var password = document.getElementById("RegisterForm").password.value;
+
+            var text1 = document.getElementById("CheckForm").text1.value;
+            var text2 = document.getElementById("CheckForm").text2.value;
+            makeCorsRequest(username, password, text1, text2);
         }
+
+        /////////////////////////////////////////////
 
 
         </script>
@@ -79,16 +86,32 @@
 
     <body>
         <h1> Plagiarism Check</h1>
-        <form id="form"> 
-                <label for="fname"> <b> Text1: </b></label>
-                <input type="text" id="fname" name="fname"><br>
+
+
+        <h2> Register</h2>
+        <form id="RegisterForm"> 
+                <label > <b> Username: </b></label>
+                <input type="text" name="username"><br>
                 
-                <label for="lname"><b> Text2: </b></label>
-                <input type="text" id="lname" name="lname"><br>
+                <label ><b> Password: </b></label>
+                <input type="text" name="password"><br>
                 
-                <input type="button" onclick="javascript:send()" value="Submit">
+                <input type="button"  value="Submit">
             </form>
-            <body id='bod'><button type="submit" onclick="javascript:makeCorsRequest('Hello', 'Hello')">call</button>
+
+
+
+
+        <h2> Check</h2>
+        <form id="CheckForm"> 
+                <label> <b> Text1: </b></label>
+                <input type="text" name="text1"><br>
+                
+                <label ><b> Text2: </b></label>
+                <input type="text" name="text2"><br>
+                
+                <input type="button" onclick="javascript:Checksend()" value="Submit">
+            </form>
         <div id='div'> </div>
 
     </body>
