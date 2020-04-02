@@ -31,7 +31,8 @@ class Register(Resource):
         })
         retJson = {
             "statuscode" : 200,
-            "message" : "you successfuly signed up for the api"
+            "message" : "you successfuly signed up for the api",
+            "tokens left" : 6
         }
         return jsonify(retJson)
 
@@ -71,7 +72,8 @@ class Detect(Resource):
         if num_tokens <= 0 :
             retJson = {
                 "statuscode" : 303,
-                "message" : "Out of tokens, please refill"
+                "message" : "Out of tokens, please refill",
+                "tokens left" : num_tokens
             }
             return jsonify(retJson)
 
@@ -86,12 +88,6 @@ class Detect(Resource):
 
         ratio = text1.similarity(text2)
         
-        retJson = {
-            "statuscode" : 200,
-            "message" : "Similarity ration calculated",
-            "similarity ratio" : ratio
-        }
-
         users.update({
             "username":username,
         },
@@ -101,6 +97,15 @@ class Detect(Resource):
             }
         }
         )
+
+        num_tokens_updated = countTokens(username)
+        retJson = {
+            "statuscode" : 200,
+            "message" : "Similarity ration calculated",
+            "similarity ratio" : ratio ,
+            "tokens left" : num_tokens_updated
+        }
+
         return jsonify(retJson)
 
 
@@ -147,8 +152,11 @@ class Refill(Resource):
         }
         )
 
+        num_tokens_updated = countTokens(username)
+
         retJson = {
             "statuscode" : 200,
-            "message" : "Tokens refilled successfully"
+            "message" : "Tokens refilled successfully",
+            "tokens left" :  num_tokens_updated
         }
         return jsonify(retJson)
