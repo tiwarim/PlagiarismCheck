@@ -1,237 +1,83 @@
 
 <html>
+
     <head>
-        <title> Testing the call </title>
+        <title> Plagiarism Check </title>
         <meta charset="UTF-8">
-
-        <script>
+        <link href="test.css" rel="stylesheet" type="text/css"> 
+        <script src="test.js"></script>
         
-        // function to create a CORS complaint http request 
-        function createCorsRequest(method, url){
-            var xhr = new XMLHttpRequest();
-            if("withCredentials" in xhr){
-                xhr.open(method, url, true);
-            } else if (typeof xDomaiRequest != "undefined"){
-                xhr = new xDomaiRequest();
-                xhr.open(method, url);
-            } else{
-                xhr = null;
-            }
-            return xhr;
-        }
-
-        /////////////////////////////////////////////////////
-        // function that calls for Register
-        function makeCorsRequestRegister(uname, pass){
-            var url = "https://cors-anywhere.herokuapp.com/ec2-3-134-81-255.us-east-2.compute.amazonaws.com:8000/register";
-            var xhr = createCorsRequest('POST', url)
-            const inJson = {
-                            "username" : uname ,
-                             "password" : pass 
-                             };
-            const jsonS = JSON.stringify(inJson);
-            if(!xhr){
-                alert('CORS not supported');
-                return;
-            }
-            xhr.onload = function(){
-                var text = xhr.responseText;
-              //  alert('Response from Cors requestt')
-            };
-            xhr.onerror = function(){
-                alert('There is an error in calling');
-            };
-            xhr.setRequestHeader("Content-Type", "application/json");
-
-            xhr.onreadystatechange = function(){
-                if(xhr.readyState == 4 && xhr.status == 200){
-                var out = JSON.parse(xhr.responseText);
-                var main = "";
-                var tbltop = `<table>
-                                <tr><th>Message</th><th>Status Code</th></tr>`;
-                
-                    main += "<tr><td>"+out.message+"</td><td>"+out.statuscode+"</td></tr>";
-                
-                var tblbottom = "</table>";
-                var tbl = tbltop + main + tblbottom;
-                document.getElementById("register").innerHTML = tbl;
-                // alert(out.message);
-                }
-            };
-            
-            xhr.send(jsonS);
-            
-        }
-
-        // sender fnc that takes inputs from the form and calls the api backedn
-        function Registersend(){
-            var username = document.getElementById("RegisterForm").username.value;
-            var password = document.getElementById("RegisterForm").password.value;
-
-            
-            makeCorsRequestRegister(username, password);
-        }
-        /////////////////////////////////////////////
-
-
-
-
-        /////////////////////////////////////////////////////
-        // function that calls for Check
-        function makeCorsRequestCheck(uname, pass, str1, str2){
-            var url = "https://cors-anywhere.herokuapp.com/ec2-3-134-81-255.us-east-2.compute.amazonaws.com:8000/detect";
-            var xhr = createCorsRequest('POST', url)
-            const inJson = {
-                            "username" : uname ,
-                             "password" : pass ,
-                             "text1" : str1,
-                             "text2" : str2
-                             };
-            const jsonS = JSON.stringify(inJson);
-            if(!xhr){
-                alert('CORS not supported');
-                return;
-            }
-            xhr.onload = function(){
-                var text = xhr.responseText;
-              //  alert('Response from Cors requestt')
-            };
-            xhr.onerror = function(){
-                alert('There is an error in calling');
-            };
-            xhr.setRequestHeader("Content-Type", "application/json");
-
-            xhr.onreadystatechange = function(){
-                if(xhr.readyState == 4 && xhr.status == 200){
-                var out = JSON.parse(xhr.responseText);
-                var main = "";
-                var tbltop = `<table>
-                                <tr><th>Message</th><th>Ratio</th><th>Status Code</th></tr>`;
-                
-                    main += "<tr><td>"+out.message+"</td><td>"+out["similarity ratio"]+"</td><td>"+out.statuscode+"</td></tr>";
-                
-                var tblbottom = "</table>";
-                var tbl = tbltop + main + tblbottom;
-                document.getElementById("check").innerHTML = tbl;
-                // alert(out.message);
-                }
-            };
-            
-            xhr.send(jsonS);
-            
-        }
-
-        // sender fnc that takes inputs from the form and calls the api backedn
-        function Checksend(){
-            var username = document.getElementById("RegisterForm").username.value;
-            var password = document.getElementById("RegisterForm").password.value;
-
-            var text1 = document.getElementById("CheckForm").text1.value;
-            var text2 = document.getElementById("CheckForm").text2.value;
-            makeCorsRequestCheck(username, password, text1, text2);
-        }
-        /////////////////////////////////////////////
-
-        /////////////////////////////////////////////////////
-        // function that calls for Refill
-        function makeCorsRequestRefill(username, admin_pass, amt){
-            var url = "https://cors-anywhere.herokuapp.com/ec2-3-134-81-255.us-east-2.compute.amazonaws.com:8000/refill";
-            var xhr = createCorsRequest('POST', url)
-            const inJson = {
-                            "username" : username ,
-                             "admin_password" : admin_pass ,
-                             "refill_amt" : Number(amt)
-                             };
-            const jsonS = JSON.stringify(inJson);
-            if(!xhr){
-                alert('CORS not supported');
-                return;
-            }
-            xhr.onload = function(){
-                var text = xhr.responseText;
-              //  alert('Response from Cors requestt')
-            };
-            xhr.onerror = function(){
-                alert('There is an error in calling');
-            };
-            xhr.setRequestHeader("Content-Type", "application/json");
-
-            xhr.onreadystatechange = function(){
-                if(xhr.readyState == 4 && xhr.status == 200){
-                var out = JSON.parse(xhr.responseText);
-                var main = "";
-                var tbltop = `<table>
-                                <tr><th>Message</th><th>Status Code</th></tr>`;
-                
-                    main += "<tr><td>"+out.message+"</td><td>"+out.statuscode+"</td></tr>";
-                
-                var tblbottom = "</table>";
-                var tbl = tbltop + main + tblbottom;
-                document.getElementById("refill").innerHTML = tbl;
-                // alert(out.message);
-                }
-            };
-            
-            xhr.send(jsonS);
-            
-        }
-
-        // sender fnc that takes inputs from the form and calls the api backedn
-        function Refillsend(){
-            var username = document.getElementById("RegisterForm").username.value;
-            var admin_password = document.getElementById("RefillForm").admin_password.value;
-            const refill_amt = document.getElementById("RefillForm").refill_amt.value;
-            
-            makeCorsRequestRefill(username, admin_password, refill_amt);
-        }
-        /////////////////////////////////////////////
-
-        </script>
     </head>
 
     <body>
-        <h1> Plagiarism Check</h1>
+        <center>
+                <h1> Plagiarism Check</h1>
+                <h2>It's now or never</h2>
+        </center>
+        
 
+        <div id="Register" class="container" >
+                
+                <h1>Come on , Join us!</h1>
+                <h2>Register</h2>
+                
+                <form action=""  id="RegisterForm">
+                <div class="fields">
+                    <span>
+                    <input name="username" placeholder="Username" type="text" />
+                </span>
+                <br />
+                <span>
+                    <input name="password" placeholder="Password" type="password" />
+                </span>
+                </div>
+                <div class="submit">
+                    <input class="submit" onclick="javascript:Registersend()" value="Submit" type="button" />
+                </div>
+                </form>
+                <div id='register' class="table"> </div>
+        </div>
 
-        <h2> Register</h2>
-        <form id="RegisterForm"> 
-                <label > <b> Username: </b></label>
-                <input type="text" name="username"><br>
-                
-                <label ><b> Password: </b></label>
-                <input type="text" name="password"><br>
-                
-                <input type="button" onclick="javascript:Registersend()" value="Submit">
+    
+
+        <div id="Check" class="container" >
+            <h2>Check</h2>
+            <form action=""  id="CheckForm">
+            <div class="fields">
+                <span>
+                <input name="text1" placeholder="write first text here" type="text" />
+            </span>
+            <br />
+            <span>
+                <input name="text2" placeholder="write text to compare with" type="text" />
+            </span>
+            </div> 
+            <div class="submit">
+                <input class="submit" onclick="javascript:Checksend()" value="Submit" type="button" />
+            </div>
             </form>
-        <div id='register'> </div>
-
-
-
-
-        <h2> Check</h2>
-        <form id="CheckForm"> 
-                <label> <b> Text1: </b></label>
-                <input type="text" name="text1"><br>
-                
-                <label ><b> Text2: </b></label>
-                <input type="text" name="text2"><br>
-                
-                <input type="button" onclick="javascript:Checksend()" value="Submit">
+            <div id='check' class="table"> </div>
+        </div>
+        
+    
+        <div id="Refill" class="container" >
+            <h2>Refill your tokens</h2>
+            <form action=""  id="RefillForm">
+            <div class="fields">
+                <span>
+                <input name="admin_password" placeholder="Admin password" type="password" />
+            </span>
+            <br />
+            <span>
+                <input name="refill_amt" placeholder="enter amount to refill" type="number" />
+            </span>
+            </div>
+            <div class="submit">
+                <input class="submit" onclick="javascript:Refillsend()" value="Submit" type="button" />
+            </div>
             </form>
-        <div id='check'> </div>
-
-
-        <h2> Refill</h2>
-        <form id="RefillForm"> 
-                <label ><b> Admin Password: </b></label>
-                <input type="text" name="admin_password"><br>
-
-                <label ><b> Refill Amount: </b></label>
-                <input type="number" name="refill_amt"><br>
-                
-                <input type="button" onclick="javascript:Refillsend()" value="Submit">
-            </form>
-        <div id='refill'> </div>
+            <div id='refill' class="table" > </div>
+        </div>
 
     </body>
 </html>
