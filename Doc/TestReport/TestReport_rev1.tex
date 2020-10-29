@@ -1,0 +1,564 @@
+\documentclass[12pt, titlepage]{article}
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{graphicx}
+\graphicspath{ {./Unit test/}{./Unit test2/} }
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=red,
+    urlcolor=blue
+}
+\usepackage[round]{natbib}
+
+\title{SE 3XA3: Test Report\\Plagiarism Check}
+
+\author{310, MXQ Squad
+		\\ Wang Xu , wangx147
+		\\ Mrinal Kumar Tiwari , tiwarim
+		\\ Qifeng Xu and xuq14
+}
+
+
+\date{\today}
+
+
+
+\begin{document}
+
+\maketitle
+
+\pagenumbering{roman}
+\tableofcontents
+\listoftables
+\listoffigures
+
+\begin{table}[H]
+\caption{\bf Revision History}
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\midrule
+April 6, 2020 & 1.0 & Added the test report\\
+
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\newpage
+
+\pagenumbering{arabic}
+
+
+\section{Functional Requirements Evaluation}
+
+Description of Tests: These tests ensure that the system is able to do what it should do based on the functional requirements. These tests will test for 4 corresponding functional requirements in the SRS.\\ \\
+	
+	Test Name: FRE1 \\
+	
+	Results: The users get a status code of 200 and a message of success when they register with a new username and password. \\ \\
+	
+	Test Name: FRE2 \\
+	
+	Results: When the users try to register with the same username twice, there is an error message displayed. \\ \\
+	
+	Test Name: FRE3 \\
+	
+	Results: The user enters two texts for plagiarism checking and gets a output of similarity ratio. \\ \\
+	
+	Test Name: FRE4 \\
+	
+	Results: After refilling the tokens, the present amount of tokens is updated to the sum of current amount of tokens and token refill amount. \\ \\
+	
+
+
+\section{Nonfunctional Requirements Evaluation}
+
+    \subsection{Look and Feel}
+    
+    Test Name: NFR1\\
+    
+    Test: Refer to the software requirement specification document, We go through the website to see if it has two text boxes for input, if there is a suitable background colour, if the user could understand what to do next, if there is a numerical results after user submitted the text.\\
+    
+    Results: The product displays two text boxes and some buttons on the website. It chooses pink and purple as its background colour. It has the information telling the user to register the account, check the text and refill the tokens. At the same time, it displays a numerical result after user has submitted the text.
+    
+	\subsection{Usability and Humanity }
+    
+	Test Name: NFR2-1\\
+	
+	Test: We have input user name '123' and password '123' to check if it registered successfully.  \\
+	
+    Results: The account registered successfully.
+    
+    Test Name: NFR2-2\\
+	
+	Test: We have input two texts with 100 percent similarity to see if the results match the one we expected. \\
+	
+    Results: The result of check test is 100 percent similarity.
+    
+    Test Name: NFR2-3\\
+	
+	Test: We input admin password 'Admiral123' and 5 tokens to see if tokens are top up. \\
+	
+    Results: The tokens top up by amount of 5. 
+    
+    \subsection{Robustness}
+    
+	Test Name: NFR3-1\\
+	
+	Test: We have input two Chinese texts to see if it can check the language other than English.\\
+	
+    Results: It can check the similarity ratio for Chinese texts as well.
+    
+    Test Name: NFR3-2\\
+	
+	Test: We have input two emoji to see if it can check emoji other than English.\\
+	
+    Results: It can check the similarity ratio for emoji as well.
+
+	\subsection{Performance}
+	
+	Test Name: NFR4\\
+	
+	Test: We tested the similarity check part to see if the result can be displayed in 0.1 second.  \\
+	
+    Results: All the tests matched what we expected. The result is displayed within less than 0.1 second after the user submits the texts. 
+	
+	\subsection{Operational and Environmental}
+	Test Name: NFR5\\
+	
+	Test: Our website is hosted by AWS and we try to run it on different devices, for example, laptop, cellphone and iPad.\\
+	
+    Results: The product is hosted by a website for local use before it is sold. The product is able to run on many different devices as long as the devices can open web browsers.
+    
+	\subsection{Maintainability and Support}
+	Test Name: NFR6\\
+	
+	Test: We did a survey test that all the user could run the program on their local machines.\\
+	
+    Results: The potential users could run the program on their local machines and the product is universally accessible by users.
+	
+	\subsection{Security}
+	Test Name: NFR7\\
+	
+	Test: We did a survey test that all the user could access the product on the website.\\
+	
+    Results: All the public visitor is able to access the product on the website. The product does not alter its source code and prevent incorrect data input.
+	\subsection{Cultural and Political}
+	Test Name: NFR8\\
+	
+	Test: It can be clearly seen that our product is available in English.\\
+	
+    Results: The product is not offensive to religious or ethnic groups. The product is available in English.
+	\subsection{Legal}
+    Test Name: NFR9\\
+    
+    Test: Basically it cannot be tested, but we are sure that it does not compromise any laws.\\
+    
+    Results: The product does not compromise any laws
+	
+
+
+\section{System Testing}	
+
+\subsection{Tests for Functional Requirements}
+	
+		\begin{table}[H]
+			
+			\begin{tabular}[r]{|l|p{10cm}|}
+				
+				\hline
+				%\label
+				
+				\textbf{Test Name} & FRE1 \\ 
+				\hline
+				\textbf{Initial State} & The interface asks user to input a new username and password.\\ 
+				\hline
+				\textbf{Input} & Valid username and password. \\ 
+				\hline 
+				\textbf{Expected Output} & The system returns a status code of 200 and a message of registration completed.  \\ 
+				\hline
+				\textbf{Actual Output} & A status code of 200 and a message of "you successfully signed up for the api".  \\ 
+				\hline
+				
+			\end{tabular}
+			\caption{Test for FRE1}
+			\label{Table}
+		\end{table}
+		
+		\begin{table}[H]
+			
+			\begin{tabular}[r]{|l|p{10cm}|}
+				
+				\hline
+				%\label
+				
+				\textbf{Test Name} & FRE2 \\ 
+				\hline
+				\textbf{Initial State} & The interface asks user to input a new username and password.\\ 
+				\hline
+				\textbf{Input} & An existing username and password. \\ 
+				\hline 
+				\textbf{Expected Output} & The system returns an error message of registration failed and the username already exists.  \\ 
+				\hline
+				\textbf{Actual Output} & A status code of 301 and an error messages "username already exists".  \\ 
+				\hline
+				
+			\end{tabular}
+			\caption{Test for FRE2}
+			\label{Table}
+		\end{table}
+		
+		\begin{table}[H]
+			
+			\begin{tabular}[r]{|l|p{10cm}|}
+				
+				\hline
+				%\label
+				
+				\textbf{Test Name} & FRE3 \\ 
+				\hline
+				\textbf{Initial State} & The interface asks user to input two texts.\\ 
+				\hline
+				\textbf{Input} & Two valid texts. \\ 
+				\hline 
+				\textbf{Expected Output} & The system returns a similarity ratio.  \\ 
+				\hline
+				\textbf{Actual Output} & The similarity ratio of two texts.  \\ 
+				\hline
+				
+			\end{tabular}
+			\caption{Test for FRE3}
+			\label{Table}
+		\end{table}
+		
+		
+		\begin{table}[H]
+			
+			\begin{tabular}[r]{|l|p{10cm}|}
+				
+				\hline
+				%\label
+				
+				\textbf{Test Name} & FRE4 \\ 
+				\hline
+				\textbf{Initial State} & The interface asks user to enter the amount of tokens.\\ 
+				\hline
+				\textbf{Input} & Valid integer. \\ 
+				\hline 
+				\textbf{Expected Output} & The system returns a message of refill successfully and the current token amount is updated.  \\ 
+				\hline
+				\textbf{Actual Output} &  A message of "Tokens refilled successfully", the current token amount is updated correctly. \\ 
+				\hline
+				
+			\end{tabular}
+			\caption{Test for FRE4}
+			\label{Table}
+		\end{table}
+		
+\subsection{Tests for Nonfunctional Requirements}		
+
+        \begin{table}[H]
+			
+			\begin{tabular}[r]{|l|p{10cm}|}
+				
+				\hline
+				%\label
+				
+				\textbf{Test Name} & NFR2-1 \\ 
+				\hline
+				\textbf{Initial State} & The interface asks user to input a new username and password.\\ 
+				\hline
+				\textbf{Input} & A unique username which is "123" and a password which is "123". \\ 
+				\hline 
+				\textbf{Expected Output} & The system returns a message of registered successfully.  \\ 
+				\hline
+				\textbf{Actual Output} & The system returns a status code of 200 and a message of "you successfully signed up for the api".  \\ 
+				\hline
+				
+			\end{tabular}
+			\caption{Test for NFR2-1}
+			\label{Table}
+		\end{table}
+
+        \begin{table}[H]
+			
+			\begin{tabular}[r]{|l|p{10cm}|}
+				
+				\hline
+				%\label
+				
+				\textbf{Test Name} & NFR2-2 \\ 
+				\hline
+				\textbf{Initial State} & The interface asks user to input two texts.\\ 
+				\hline
+				\textbf{Input} & Two valid texts with a proven similarity ratio of 100 percent. \\ 
+				\hline 
+				\textbf{Expected Output} & The system returns a result of 100 percent similarity.  \\ 
+				\hline
+				\textbf{Actual Output} & A similarity ratio of 100 percent.  \\ 
+				\hline
+				
+			\end{tabular}
+			\caption{Test for NFR2-2}
+			\label{Table}
+		\end{table}
+		
+		\begin{table}[H]
+			
+			\begin{tabular}[r]{|l|p{10cm}|}
+				
+				\hline
+				%\label
+				
+				\textbf{Test Name} & NFR2-3 \\ 
+				\hline
+				\textbf{Initial State} & The interface asks user to input admin password and token amount, the current token amount is 6.\\ 
+				\hline
+				\textbf{Input} & A valid username of "123" and admin password which is "Admiral123" and 5 tokens. \\ 
+				\hline 
+				\textbf{Expected Output} & The system returns a message of refill successfully and updates current token amount. \\ 
+				\hline
+				\textbf{Actual Output} & A message of "Tokens refilled successfully", and the current token amount is updated to 11.  \\ 
+				\hline
+				
+			\end{tabular}
+			\caption{Test for NFR2-3}
+			\label{Table}
+		\end{table}
+		
+		\begin{table}[H]
+			
+			\begin{tabular}[r]{|l|p{10cm}|}
+				
+				\hline
+				%\label
+				
+				\textbf{Test Name} & NFR3-1 \\ 
+				\hline
+				\textbf{Initial State} & The interface asks user to input two texts.\\ 
+				\hline
+				\textbf{Input} & Two identical texts with Chinese characters. \\ 
+				\hline 
+				\textbf{Expected Output} & The system returns a status code of 200 and a similarity ratio of 100.  \\ 
+				\hline
+				\textbf{Actual Output} & The system returns a status code of 200 and a similarity ratio of 100.  \\ 
+				\hline
+				
+			\end{tabular}
+			\caption{Test for NFR3-1}
+			\label{Table}
+		\end{table}
+		
+		\begin{table}[H]
+			
+			\begin{tabular}[r]{|l|p{10cm}|}
+				
+				\hline
+				%\label
+				
+				\textbf{Test Name} & NFR3-2 \\ 
+				\hline
+				\textbf{Initial State} & The interface asks user to input two texts.\\ 
+				\hline
+				\textbf{Input} & Two identical emoji. \\ 
+				\hline 
+				\textbf{Expected Output} & The system returns a status code of 200 and a similarity ratio of 100.  \\ 
+				\hline
+				\textbf{Actual Output} & The system returns a status code of 200 and a similarity ratio of 100.  \\ 
+				\hline
+				
+			\end{tabular}
+			\caption{Test for NFR3-2}
+			\label{Table}
+		\end{table}
+		
+		\begin{table}[H]
+			
+			\begin{tabular}[r]{|l|p{10cm}|}
+				
+				\hline
+				%\label
+				
+				\textbf{Test Name} & NFR4 \\ 
+				\hline
+				\textbf{Initial State} & The interface asks user to input two texts.\\ 
+				\hline
+				\textbf{Input} & The interface asks user to submit the request and the timer is set to 0. \\ 
+				\hline 
+				\textbf{Expected Output} & The system returns a result in less than 0.1 second.  \\ 
+				\hline
+				\textbf{Actual Output} & The calculated processing time is 0.00729s.  \\ 
+				\hline
+				
+			\end{tabular}
+			\caption{Test for NFR4}
+			\label{Table}
+		\end{table}
+		
+		\begin{table}[H]
+			
+			\begin{tabular}[r]{|l|p{10cm}|}
+				
+				\hline
+				%\label
+				
+				\textbf{Test Name} & NFR5 \\ 
+				\hline
+				\textbf{Initial State} & Preparation of multiple devices that are able to connect to network and have a valid browser.\\ 
+				\hline
+				\textbf{Input} & Open the webpage on different devices and submit the request. \\ 
+				\hline 
+				\textbf{Expected Output} & The system works and returns expected results.  \\ 
+				\hline
+				\textbf{Actual Output} & The system works and returns expected results.  \\ 
+				\hline
+				
+			\end{tabular}
+			\caption{Test for NFR5}
+			\label{Table}
+		\end{table}
+		
+
+
+\section{Changes Due to Testing}
+
+\subsection{Tests for Functional Requirements}
+
+    There is no change due to testing for functional requirements, since all results of the completed tests matched with their expected output.
+
+\subsection{Tests for Nonfunctional Requirements}
+
+    During the tests, we noticed the processing time of each function is much less than 1 second. it is less than 0.01 second in most of the cases, therefore, we decided to change the time limit in the nonfunctional requirement of performance to 0.1 second. 
+
+\section{Automated Testing}
+
+\subsection{Tests for Functional Requirements}
+
+    The automated unit tests are applied for 4 functional requirements that are able to be tested through pytest. Each tested functional requirements has at least a regular case, a failed case case and a succeed case with unusual inputs. 
+    
+    For the FRE1, 3 test cases are created. There is one with unique and valid username and password that passes the test, one with the username that already exists that fails the test and one with the username consist of 3 special symbols that passes the test.
+    
+    For the FRE2, it is similar to the failed test case in FRE1. There are only 2 test cases for it because there is no abnormal inputs that can be used to test for it.
+    
+    For the FRE3, 4 test cases are created. There is one with valid username, password and texts that passes the test, one with username that does not exist which fails the test, one with invalid password that passes the test with abnormal status code of 302 and one with a username that run out of tokens passes the test with abnormal status code of 303.
+    
+    For the FRE4, 4 test cases are created. There is one with valid username and admin password that passes the test, one with non-exist username that passes the test with a abnormal status code of 301, one with valid username and invalid admin password that passes the test with abnormal status code of 304 and one with wrong amount of tokens that fails the test.
+    
+\subsection{Tests for Nonfunctional Requirements}
+
+    Each test case for Nonfunctional Requirement is created based on the test name, initial state, input, and expected output in the section of system testing. As a result, all the actual outputs from the test cases are identical to the actual outputs in the table of system testing.
+
+\newpage		
+\section{Trace to Requirements}
+
+\begin{table}[!htbp]
+			\begin{tabular}{ll}
+				\toprule
+				Test & Requirements \\
+				\midrule
+				\multicolumn{2}{c}{Functional Requirements Testing} \\
+				\midrule
+				FRE1 & FR1 \\
+				FRE2 & FR2,FR3 \\
+				FRE3 & FR4,FR5 \\
+				FRE4 & FR7 \\
+				\midrule
+				\multicolumn{2}{c}{Non-functional Requirements Testing} \\
+				\midrule
+				NFR1 & NF3.1.1,NF3.1.2 \\
+				NFR2-1 & NF3.2.1-NF3.2.4\\
+				NFR2-2 & NF3.2.1-NF3.2.4\\
+				NFR2-3 & NF3.2.1-NF3.2.4\\
+				NFR3-1 & NF3.3.4\\
+				NFR3-2 & NF3.3.4\\
+				NFR4 & NF3.3.1-NF3.3.3 \\
+				NFR5 & NF3.4.1,NF3.4.2 \\
+				NFR6 & NF3.5.1, NF3.5.2 \\
+				NFR7 & NF3.6.1, NF3.6.2 \\
+				NFR8 & NF3.7 \\
+				NFR9 & NF3.8.1\\
+				
+				\bottomrule
+			\end{tabular}
+			\caption{Trace Between Tests and Requirements}
+			% Colour for the rulings in tables:
+			\makeatletter
+			\def\rulecolor#1#{\CT@arc{#1}}
+			\def\CT@arc#1#2{%
+				\ifdim\baselineskip=\z@\noalign\fi
+				{\gdef\CT@arc@{\color#1{#2}}}}
+			\let\CT@arc@\relax
+			\rulecolor{black!50}
+			\makeatother
+			\label{Table}
+		\end{table}
+		
+		\FloatBarrier
+	
+	\newpage
+
+\section{Trace to Modules}	
+
+\begin{table}[!htbp]
+	\begin{tabular}{ll}
+		\toprule
+		Test & Modules \\
+		\midrule
+		\multicolumn{2}{c}{Functional Requirements Testing} \\
+		\midrule
+		FRE1 & M2 \\
+		FRE2 & M2 \\
+		FRE3 & M3 \\
+		FRE4 & M4 \\
+		\midrule
+		\multicolumn{2}{c}{Non-functional Requirements Testing} \\
+		\midrule
+		NFR1 & M1,M5 \\
+		NFR2-1 & M2\\
+		NFR2-2 & M3\\
+		NFR2-3 & M4\\
+		NFR3-1 & M1,M3,M5,M6,M7 \\
+		NFR3-2 & M1,M3,M5,M6,M7 \\
+		NFR4 & M1,M3,M5,M6,M7 \\
+		NFR5 & M1,M2,M3,M4,M5,M6,M7 \\
+		NFR6 & M1,M2,M3,M4,M5,M6,M7\\
+		NFR7 & M1,M2,M3,M4,M5,M6,M7 \\
+		NFR8 & M1,M2,M3,M4,M5,M6,M7\\
+		NFR9 & M1,M2,M3,M4,M5,M6,M7\\
+		\bottomrule
+	\end{tabular}
+	\caption{Trace Between Tests and Modules}
+	% Colour for the rulings in tables:
+	\makeatletter
+	\def\rulecolor#1#{\CT@arc{#1}}
+	\def\CT@arc#1#2{%
+		\ifdim\baselineskip=\z@\noalign\fi
+		{\gdef\CT@arc@{\color#1{#2}}}}
+	\let\CT@arc@\relax
+	\rulecolor{black!50}
+	\makeatother
+	\label{Table}
+\end{table}
+\FloatBarrier
+
+\section{Code Coverage Metrics}
+
+We has managed to produce roughly 100 percent statement coverage and 90 percent condition coverage through our tests. All of the modules and all the different situations of status code have been covered through our tests. It can be seen from the trace to modules section, we covered each module multiple times.
+
+\section{Appendix}
+
+\includegraphics[width=\textwidth]{Unit test}
+
+
+\includegraphics[width=\textwidth]{Unit test2}
+
+
+\bibliographystyle{plainnat}
+
+\bibliography{SRS}
+
+\end{document}

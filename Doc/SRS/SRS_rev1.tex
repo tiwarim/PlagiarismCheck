@@ -1,0 +1,448 @@
+\documentclass[12pt, titlepage]{article}
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{soul}
+
+\usepackage{float}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=red,
+    urlcolor=blue
+}
+\usepackage[round]{natbib}
+
+\title{SE 3XA3: Software Requirements Specification: Rev 1\\\textbf{Plagiarism Check}}
+
+\author{Team 310, MXQ Gang
+		\\ Qifeng Xu, xuq14
+		\\ Xu Wang, wangx147
+		\\ Mrinal Tiwari, tiwarim
+}
+
+\date{\today}
+
+
+
+\begin{document}
+
+\maketitle
+
+\pagenumbering{roman}
+{
+  \hypersetup{linkcolor=black}
+  \tableofcontents
+}
+{
+  \hypersetup{linkcolor=black}
+  \listoftables
+}
+
+\listoffigures
+
+\begin{table}[bp]
+\caption{\bf Revision History}
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\midrule
+Feb 9, 2020 & 1.0 & added the requirement specification\\
+\midrule
+\textcolor{red}{April 6, 2020} & \textcolor{red}{1.1} & \textcolor{red}{updated the requirement specification}\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\newpage
+
+\pagenumbering{arabic}
+
+
+\section{Project Drivers}
+
+\subsection{The Purpose of the Project}
+
+This project is to develop a plagiarism checker that can detect the similarity ratio of two documents. With the development of the internet, more and more documents and information can be accessed and referenced. Therefore, the people who cite a lot of documents need to make sure their work is unique. The purpose of this software is to avoid plagiarism for writing essays and documentations. It is able to assist students and researchers to accomplish better documents.  
+
+\subsection{The Stakeholders}
+
+\subsubsection{The Client}
+
+The client of this software is the people and institutions that require the service of plagiarism checking continuously. They are the people and institutions that need this service in their daily work such as researchers and universities.
+
+\subsubsection{The Customers}
+
+The customer of this software is the general public whoever needs to check for plagiarism for their documents. The majority of the customer for this product will be student who is working on a project or essay.
+
+\subsubsection{Other Stakeholders}
+
+The people who are interested in this service can also be our stakeholders. They may only need to use this product once or twice, but these people can be major users of this software.
+
+\subsection{Mandated Constraints}
+
+\subsubsection{Solution Constraints}
+
+{\bf Constraint:} This software shall operate correctly on devices (e.g. Desktop, Laptop, cell phone and tablet) with a browser that is compatible with python. \\
+{\bf Rationale:} The clients use correct browsers to execute this software. \\
+{\bf Fit Criterion:} The software shall be approved to operated correctly if the users are using appropriate browsers.
+
+\subsubsection{Schedule Constraints}
+
+This project shall be completely finished by April 6, 2020.
+
+\subsubsection{Budget Constraints}
+
+The purposing budget for this project is 0. Since this project is focusing on redeveloping and improving an existing software, it does not require any budgets on it.
+
+\subsection{Naming Conventions and Terminology}
+
+\begin{table}[H]
+\centering
+\caption{\bf Table of Terms and Abbreviations}
+\label{tab:my-table}
+
+\begin{tabular}{|l|l|}
+\hline
+Term               & Definition \\ \hline
+REST               & method of using API over internet         \\ \hline
+API                & routines for building software tools          \\ \hline
+Containers         & standalone images and libraries needed          \\ \hline
+Docker             & containerization tool        \\ \hline
+Kubernetes         & orchestration tool            \\ \hline
+Orchestration Tool & tool used for scaling the container           \\ \hline
+\st{React}              & \st{C\# framework for making UI}            \\ \hline
+\textcolor{red}{Python3} & programming language used to implement the functionality \\ \hline
+\textcolor{red}{HTML 5}             & \textcolor{red}{programming language to make a static website} \\ \hline
+\textcolor{red}{CSS 5}              & \textcolor{red}{language used to give styling to a static website} \\ \hline
+\textcolor{red}{JS}                 & \textcolor{red}{JavaScript programming language used to make a website interactive}  \\ \hline
+\textcolor{red}{GUI}                                 & \textcolor{red}{Graphical User Interface} \\ \hline
+\end{tabular}%
+
+\end{table}
+
+\subsection{Relevant Facts and Assumptions}
+
+\subsubsection{Relevant Facts}
+
+The existing software is 264 lines of python code. This software does not have a license since it was previously developed by one of \st{our group members} \textcolor{red}{the team member on the MXQ Software Development team of} \st{for} this project.
+
+\subsubsection{Assumptions}
+
+It is assumed that the users are able to connect to internet when they need to use this software and they can understand the basic operation of this software.
+
+\section{Functional Requirements}
+
+\subsection{The Scope of the Work and the Product}
+
+\subsubsection{The Context of the Work}
+\textcolor{red}{Plagiarism Check is a further development to the open source Plagiarism Check REST Api which checks similarity between two documents and gives a hit for plagiarism. Further development to this project involves modifying existing code for better readability and maintainability, adding a GUI to the project in the form of an interactive website allowing registration of user, detection for similarity and refilling of tokens to access the features.}
+
+\begin{itemize}
+		\item Requirements Document Revision 0  February 9
+		\item Proof of Concept Demonstration    February 10			
+		\item Test Plan Revision 0              February 28 		
+		\item Design Documentation				March 13
+		\item Demonstration Revision 0		    March 16
+		\item Final Demonstration Revision 1    March 30			
+		\item Final Documentation Revision 1	April 6 
+	\end{itemize}
+	
+
+\subsubsection{Work Partitioning}
+\begin{table}[H]
+\caption{Work Partitioning Part I}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Event Number & Event Name & Input & Output\\
+\hline
+1 & Plagiarism Check Creation & Developer code & Internet Browser\\
+\hline
+2 & Text Input Reading & Text & \\
+\hline
+3 & Plagiarism Check  & Text & Result\\
+\hline
+\textcolor{red}{4} & \textcolor{red}{Register account}  & \textcolor{red}{Text} & \textcolor{red}{Result}\\
+\hline
+\textcolor{red}{5} & \textcolor{red}{Refill tokens}  & \textcolor{red}{Text} & \textcolor{red}{Result}\\
+\hline
+\end{tabular}
+\end{center}
+\label{default}
+\end{table}%
+
+\begin{table}[H]
+\caption{\bf Work Partitioning Part II}
+\begin{center}
+\begin{tabular}{|c|c|}
+
+\hline
+Event Number & Summary of BUC\\
+\hline
+1 & Create the Internet browser based on the code\\ 
+\hline
+2 & Record the text that user has input\\
+\hline
+3 & Start comparing the two text and return the result\\
+\hline
+\textcolor{red}{4} & \textcolor{red}{Finish edits to the project}\\
+\hline
+
+\end{tabular}
+\end{center}
+\label{default}
+\end{table}%
+
+
+
+\subsubsection{Individual Product Use Cases}
+
+\subsection{Functional Requirements}
+\begin{itemize}
+  \item \textbf{FR1:} The website shall allow user registration using username and password. \\*
+  \st{Fit Criterion / test case: Gives a status code of 200 when user hits Register button.} \\*
+  \textcolor{red}{\textbf{Rationale:} To allow a personal account for every user using the Plagiarism Check service.} 
+  
+  \item \textbf{FR2:} The website shall allow user to login using unique username and password. \\*
+  \st{Fit Criterion / test case: There should not be multiple users in database with the same username. When trying to register same username twice, website should display an error. } \\*
+  \textcolor{red}{\textbf{Rationale:} There should not be two users with the same username.}
+  
+  \item \textbf{FR3:} User's password shall not be stored in database as the original password. \\*
+  \st{Fit Criterion / test case: The password stored in the database and the original password should not match. The password in database should been hashed and should look unlike natural language.} \\*
+  \textcolor{red}{\textbf{Rationale:} For security and safety from malicious hacks, the user's credentials should not be stored in true form.} \\*
+  
+  \item \textbf{FR4:} User shall be able to enter the two texts it wants to compare for plagiarism. \\*
+  \st{Fit Criterion / test case: Check the webpage, it should contain two text boxes to enter each text1 and text2.} \\*
+  \textcolor{red}{\textbf{Rationale:} A way of getting inputs from the user.}
+  
+  \item \textbf{FR5:} Web-page shall have a submit button to submit the two texts to compare. \\*
+  \st{Fit Criterion / test case: Check the webpage if it consists a button specified for submitting inputs and calling the API.} \\*
+  \textcolor{red}{\textbf{Rationale:} A method to send inputs and accept output.}
+  
+  \item \textbf{FR6:} The website shall allow a user to refill his tokens whenever required. \\*
+  \st{Fit Criterion / test case: After refilling tokens, the present token should be sum of token refill amount and original number of tokens.} \\*
+  \textcolor{red}{\textbf{Rationale:} A way to monetize the service by using tokens and getting paid to increase tokens for users.}
+  
+  \item \textbf{FR7:} The API shall return status code for each API call.  \\*
+  \st{Fit Criterion / test case: In the terminal, there should be status code displayed for each API call.} \\*
+  \textcolor{red}{\textbf{Rationale:} A way to tell if the backend is working as expected.}
+\end{itemize}
+
+
+%---------------------------------------------------------------------
+\section{Non-functional Requirements}
+\subsection{Look and Feel Requirements}
+\subsubsection{Appearance Requirements}
+The product should display two text boxes and some buttons on the website. It would choose a suitable color as its background color. Also, there would be some instructions to help the user understand what to do next. The product should display a numerical result after user has submit the text.
+
+
+\subsubsection{Style Requirements}
+Plagiarism Check would appear as a literal website. It should make the user feel comfortable when they use the product.
+
+
+\subsection{Usability and Humanity Requirements}
+\subsubsection*{Ease of Use Requirements}
+The product should be easy to use for any individual who is studying or working in high school and universities.
+
+
+\subsubsection{Personalization and Internationalization Requirements}
+All text displayed by interface shall in English with Canadian spelling.
+
+
+\subsubsection{Learning Requirements}
+The user shall be able to operate an internet browser and a mouse.
+
+
+\subsubsection{Understandability and Politeness Requirements}
+The user shall be able to operate an internet browser and a mouse.
+
+
+\subsubsection{Accessibility Requirements}
+The product shall be usable by partially sighted users.
+
+
+\subsection{Performance Requirements}
+\subsubsection*{Speed and Latency Requirements}
+The result shall be displayed immediately after user submits the text.
+
+
+\subsubsection{Safety-Critical Requirements}
+The product shall not compromise the user data or internet environment.
+
+
+\subsubsection{Precision or Accuracy Requirements}
+The product shall use integer numbers outside the text input area.
+
+
+\subsubsection{Reliability and Availability Requirements}
+The product shall be available for use 24 hours per day, 365 days per year wherever there is an internet connection.
+
+
+\subsubsection{Robustness or Fault-Tolerance Requirements}
+The product would not save text if website crashes, but there would be a message explaining that the program unexpectedly quit when relaunched.
+
+
+\subsubsection{Capacity Requirements}
+The game shall not exceed the server load.
+
+
+\subsubsection{Scalability or Extensibility Requirements}
+The code will allow for scalability.
+
+
+\subsubsection{Longevity Requirements}
+The product shall be relevant to the lifetime of JavaScript functional browsers and website server.
+
+\subsection{Operational and Environmental Requirements}
+\subsubsection*{Expected Physical Environment}
+The product shall be used in any environment that contains access to the internet.
+
+
+\subsubsection{Requirements for Interfacing with Adjacent Systems}
+The product shall be able to run on many different devices as long as the devices can open web browsers.
+
+
+\subsubsection{Productization Requirements}
+The product shall be hosted by a website for local use before it is sold. 
+
+\subsubsection{Release Requirements}
+The program shall update yearly and satisfy the customer’s demand.
+
+
+\subsection{Maintainability and Support Requirements}
+\subsubsection*{Maintenance Requirements}
+Make maintenance of the product minimal.
+
+
+\subsubsection{Supportability Requirements}
+Ensure the potential users could run the program on their local machines.
+
+
+\subsubsection{Adaptability Requirements}
+The game shall be universally acessable by users.
+
+
+\subsection{Security Requirements}
+\subsubsection*{Access Requirements}
+All the public visitor shall be able to access the product on the website. 
+
+\subsubsection{Integrity Requirements}
+The product shall not alter its source code. \\
+The product shall prevent incorrect data input.\\
+
+\subsubsection{Privacy Requirements}
+The product shall not divulge data submitted or any user’s personal information.
+
+
+\subsubsection{Audit Requirements}
+N/A
+
+\subsubsection{Immunity Requirements}
+N/A
+
+\subsection{Cultural and Political Requirements}
+\subsubsection*{Cultural Requirements}
+The product shall not be offensive to religious or ethnic groups. The product shall be available in English.
+
+\subsubsection{Political Requirements}
+N/A
+
+\subsection{Legal Requirements}
+\subsubsection{Compliance Requirements}
+The product shall not compromise any laws.
+
+
+\subsubsection{Standards Requirements}
+N/A
+
+\subsection{\textcolor{red}{Health and Safety Requirements}}
+\textcolor{red}{N/A}
+
+\section{Project Issues}
+
+\subsection{Open Issues}
+N/A
+
+\subsection{Off-the-Shelf Solutions}
+\textbf{Ready made products:} Grammarly \\
+\\
+\textbf{Reusable code components:} Natural language processing model Spacy \\
+\\ 
+\textbf{Products that can be copied:} This being a re-development of an open-source project, the original implementation, "Plagiarism Check REST API" can be used as a source code. 
+
+\subsection{New Problems}
+\textbf{Effects on Current environment:} Our dynamic website would be one of the hundreds of millions of website that get hosted on the server. However, if the server gets overloaded by significantly larger number of users at the same time, it could result in server crashing and could take down all the websites on the server including ours. \\
+\\
+\textbf{Effects on the installed system:} This project of ours is implemented in a containerized manner using Docker and thus each container is standalone and independent. Crash in one container would not affect other containers. \\
+\\
+\textbf{Potential User Problems:}  \\
+N/A \\
+\\
+\textbf{Limitations in the Anticipated Implementation Environment that may inhibit the new product:} The website might have a bit more latency than desired due to use of trivial HTML and JS. If we encounter such latency, we could overcome it by using React for front-end. \\*
+There is also a possibility of high user traffic which could result in server crash or slow performance of our website. We could use orchestration tools like Kubernetes to scale our containers automatically in  horizontal or vertical direction as required to handle more user traffic.\\
+\\
+\textbf{Follow-up problems:} It would be difficult to cope with the problem if any of the developers in the team quits as each of the developers in the team has its own strength and weakness and the work is divided based on the strengths. \\*
+There is also a follow up problem of web browsers releasing new updates every once in a while or a whole new browser getting released making our code implementation void or non-functional.
+
+\subsection{Tasks}
+Our project's task is set according to the deliverable set for Software Engineering 3XA3 course-work and team milestones. Refer to Table 2.
+
+\begin{table}
+    \caption{\bf Task time-table}
+    \begin{tabular}{ |p{10cm}|p{6cm}|  }
+     \hline
+     \multicolumn{2}{|c|}{Deliverable, schedule} \\
+     \hline
+     Deliverable name & Due by \\
+     \hline
+     Problem Statement & January 24, 2020 \\
+     Development Plan  & January 31, 2020\\
+     HTML page for login & February 5, 2020 \\
+     HTML page for user input and similarity result & February 7, 2020 \\
+     Requirement Document Revision 0 & February 9, 2020\\
+     Proof of Concept Demo & February 10, 2020 \\
+     HTML page ready for refilling tokens & February 18, 2020 \\
+     Test Plan Revision 0 & February 28, 2020 \\
+     Linking HTML to REST Api, testing & Marc 10, 2020 \\
+     Design and Document Revision 0 & March 13, 2020\\
+     Revision 0 Demo & week of March 16\\
+     Final Demo Revision 1 & week of march 30\\
+     Final Demo & week of march 30\\
+     Final Documentation Revision 1 & April 6, 2020\\
+     \hline
+    \end{tabular}
+\end{table}
+
+\subsection{Migration to the New Product}
+\textbf{Requirements for migration to the New Product:} A dynamic interactive website that lets user login and enter texts and get the similarity ratio. \\
+\\
+\textbf{Data that has to be modified or translated for the new system:} none
+
+\subsection{Risks}
+There is a risk of low quality of the website and  low productivity of the development team during to unforeseen circumstances in future. 
+
+\subsection{Costs} 
+There are no costs involved at present but this could change if any of the currently used technologies or web hosting service starts to monetize its service in future.
+
+\subsection{User Documentation and Training} 
+\st{N/A} \\*
+\textcolor{red}{To use Plagiarism Check please visit "http://plagiarismcheck-com.stackstaging.com". To register for this service, use Register section of the website to fill in the desired username and password and click on "Register" button.}  \\
+
+\textcolor{red}{Once the user is registered, use Detect section of the webpage to enter two texts to compare and click on "Submit" button. In a moment, a table would appear containing the similarity ratio between the two texts, message and number of tokens left for the user.} \\
+
+\textcolor{red}{User can also refill his tokens by giving inputs Admiral password "Admiral123" and amount to refill and clicking "Submit" button in the Refill section.}  
+
+\subsection{Waiting Room}
+\begin{itemize}
+\item \textcolor{red}{Implementation} of front-end in React for a better UI. 
+\item \textcolor{red}{Support} of complex data like charts and images. 
+\item \textcolor{red}{Hosted} using Kubernetes clustering for scaling.
+\end{itemize}
+
+\subsection{Ideas for Solutions}
+Token shift of credentials when user goes from one URL to another in order to have authentication.
+
+
+\end{document}

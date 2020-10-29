@@ -1,0 +1,779 @@
+\documentclass[12pt, titlepage]{article}
+
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{soul}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=blue
+}
+\usepackage[round]{natbib}
+
+\title{SE 3XA3: Test Plan: Rev 1\\\textbf{Plagiarism Check}}
+
+\author{310, MXQ Squad
+		\\ Wang Xu , wangx147
+		\\ Mrinal Kumar Tiwari , tiwarim
+		\\ Qifeng Xu and xuq14
+}
+
+\date{\today}
+
+
+
+\begin{document}
+
+\maketitle
+
+\pagenumbering{roman}
+\tableofcontents
+\listoftables
+\listoffigures
+
+\begin{table}[bp]
+\caption{\bf Revision History}
+\begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
+\toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\midrule
+Feb 9, 2020 & 1.0 & Added the requirement specification \\
+Feb 28, 2020 & 1.1 & Added the Test Plan\\
+\textcolor{red}{April 6, 2020 & 1.2 & Updated the test plan}\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+
+\newpage
+
+\pagenumbering{arabic}
+
+
+\section{General Information}
+
+\subsection{Purpose}
+The purpose of this Test Plan Document is to build the confidence that the software being implemented for the Plagiarism Check project is tested as per the standard and  is correct.
+
+\subsection{Scope}
+The Test Plan presents a basis for testing the functionality and user interface of the implementation of Plagiarism Check. This test plan has a goal to prove that Plagiarism Check has met the requirements specified in the Requirements Document and to attach metrics to those requirements so that adherence to requirements is quantifiable and measurable. 
+\\
+The testing plan acts as a means to arrange testing activities. Test Plan will present what part of the software is to be tested and by what methodology. It will also act as an outline of testing methods and will outline the tools that will be utilized to test the software.
+
+\subsection{Acronyms, Abbreviations, and Symbols}
+	
+\begin{table}[H]
+\caption{\textbf{Table of Abbreviations}} \label{Table}
+
+\begin{tabularx}{\textwidth}{p{3cm}X}
+\toprule
+\textbf{Abbreviation} & \textbf{Definition} \\
+\midrule
+PoC & Proof of Concept\\
+SRS & Software Requirements Specification\\ 
+GUI & Graphical User Interface \\
+JS & Java Script \\
+\bottomrule
+\end{tabularx}
+
+\end{table}
+
+\begin{table}[H]
+\caption{\textbf{Table of Definitions}} \label{Table}
+
+\begin{tabularx}{\textwidth}{p{4cm}X}
+\toprule
+\textbf{Term} & \textbf{Definition}\\
+\midrule
+Structural Testing & Testing derived from internal structure of the software\\
+Functional testing & Testing derived from a description of how the program functions\\
+Static testing & Testing that does not involve program execution \\
+Dynamic testing & Testing which includes having test cases run during execution \\
+Automated testing & Testing that is run automatically by software \\
+Register page & Webpage allowing user to register for the API \\
+Detect page & Webpage allowing user to input two texts and check similarity ratio \\
+Refill page & Webpage allowing user to input their username, admin password and refill the number of tokens available to them \\
+
+\bottomrule
+\end{tabularx}
+
+\end{table}	
+
+\subsection{Overview of Document}
+The Plagiarism Check project will be an additional development to the open source Rest Api acting as its backend. The software will allow user to sign-up for the Api, log into their account, input two texts and check for the plagiarism. These user interactions would be done through a website having a \textit{GUI}. \\*
+All of the software requirements are numbered in the Requirements Document.
+
+\section{Plan}
+	
+\subsection{Software Description}
+The software will allow users to check their input text data. The implementation will be completed in Python and JavaScript.
+
+\subsection{Test Team}
+The test team will consist of Qifeng Xu, Wang Xu, Mrinal Tiwari. The three main testers will split the entire testing evenly covering all types of testing. 
+
+\subsection{Automated Testing Approach}
+PyUnit will be used to automate the unit testing.  We will also be using Mocha,JS based automated testing framework. It is a dynamic framework  well known for its ease of use in both frontend and backend testing. \\
+
+\textcolor{red}{PyTest would be used to automate unit testing of the Backend Api written in Python. PyTest framework for unit testing is easy to use, simple to write and easy to automate the testing. Once all PyTests pass, unit testing using MochaJS would be used to ensure integration of Python Backend and JS frontend integrates as expected. MochaJS is also an easy to use and automate unit testing frameowork for testing Api in JS.} 
+
+\subsection{Testing Tools}
+The Tool that will be utilized for this project is PyUnit and Mocha testing framework. We would be also using Coverage.py for code coverage metrics.
+
+\subsection{Testing Schedule}
+\begin{table}[!htbp]
+    \caption{\bf Testing Assignemts}
+	\begin{tabular}[pos]{|l|c|r|}
+		
+		\hline
+	%	\label
+		\textbf{Date}& \textbf{Task} & \textbf{Team Member} \\ \hline
+		March 15th 2020& Mocha testing & Qifeng Xu\\ \hline
+		March 20th 2020 & Registration Testing & Mrinal Kumar Tiwari\\ \hline
+		March 30th 2020 & Unit Testing & Wang Xu
+	\\ \hline
+		March 30th 2020 & Unit Testing & Qifeng Xu \\ \hline
+		March 30th 2020 & Mocha Testing & Mrinal Kumar Tiwari \\ \hline
+		March 30th 2020 & Unit Testing & Mrinal Kumar Tiwari \\ \hline
+		April 5th 2020& Usability & Qifeng Xu \\ \hline
+		April 5th 2020 & Performance & Wang Xu \\ \hline 
+		
+	\end{tabular}
+		
+		\label{Table 4}	
+	
+\end{table}	
+
+		
+See Gantt Chart at the following url:
+
+\url{https://gitlab.cas.mcmaster.ca/wangx147/3xa3-project/-/blob/master/ProjectSchedule/Testing_Schedule.gan}
+
+\section{System Test Description}
+	
+\subsection{Tests for Functional Requirements}
+The tests for functional requirements have been written using PyUnit and Mocha unit testing frameworks. Please refer to section 3 and section 6 both to see different tests for the functional requirements.
+
+\subsubsection{User registration}
+also refer to section 6.1.1 - 6.1.2
+		
+\paragraph{Username and password input}
+
+\begin{enumerate}
+
+\item{Test Case 1.1.1\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The interface asks user to input a new username and password.
+					
+Input: A valid username and password pair.
+					
+Output: Registration Completed successfully.
+					
+How test will be performed: The function that registers a new user will be run through the interface with certain inputs. After it has been run, check the result of this action to see if the registration is completed successfully or there is an error.
+					
+\item{Test Case 1.1.2\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The interface asks user to input a new username and password.
+					
+Input: Invalid username (Already been registered) and valid password.
+					
+Output: Fail to complete the registration, the username already exists. \textcolor{red}{Error code : 301}
+					
+How test will be performed: The function that register a new user will be run through the interface with certain inputs. After it has been run, check the result of this action to see if the registration is completed successfully or there is an error.
+
+\item \st{ Test Case 1.1.3} \\
+
+\st{Type: Functional, Dynamic, Manual.}
+					
+\st{ Initial State: The interface asks user to input a new username and password.}
+					
+\st{Input: Invalid username (Invalid characters) and valid password.}
+					
+\st{Output: Fail to complete the registration, the username contains invalid characters.}
+					
+\st{How test will be performed: The function that register a new user will be run through the interface with certain inputs. After it has been run, check the result of this action to see if the registration is completed successfully or there is an error.}
+
+\item \st{Test Case 1.1.4}\\ 
+
+\st {Type: Functional, Dynamic, Manual.}
+					
+\st{Initial State: The interface that asked user to input a new username and password.}
+					
+\st{Input: Valid username and invalid password (Too short).}
+					
+\st{Output: Fail to complete the registration, the password is too short, minimum of a valid password should contain 8 characters.}
+					
+\st{How test will be performed: The function that register a new user will be run through the interface with certain inputs. After it has been run, check the result of this action to see if the registration is completed successfully or there is an error.}
+
+\item{Test Case 1.1.5\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The interface that asked user to input a new username and password.
+					
+Input: Valid username and invalid password (Invalid characters).
+					
+Output: Fail to complete the registration, the password contains invalid characters. \textcolor{red}{Error code: 302}
+					
+How test will be performed: The function that register a new user will be run through the interface with certain inputs. After it has been run, check the result of this action to see if the registration is completed successfully or there is an error.
+
+\item{\st{ Test Case 1.1.6}\\}
+
+\st{Type: Functional, Dynamic, Manual.}
+					
+\st{Initial State: The interface that asked user to input a new username and password.}
+					
+\st{Input: Invalid username (Invalid characters) and invalid password (Invalid characters).}
+					
+\st{Output: Fail to complete the registration, the username contains invalid characters.}
+					
+\st{How test will be performed: The function that register a new user will be run through the interface with certain inputs. After it has been run, check the result of this action to see if the registration is completed successfully or there is an error.}
+
+\item{Test Case 1.1.7\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The interface that asked user to input a new username and password.
+					
+Input: Invalid username (Already been registered) and invalid password (Invalid characters).
+					
+Output: Fail to complete the registration, the username already exists. \textcolor{red}{Error: 301}
+					
+How test will be performed: The function that register a new user will be run through the interface with certain inputs. After it has been run, check the result of this action to see if the registration is completed successfully or there is an error.
+
+\end{enumerate}
+
+\subsubsection{User Login }
+
+\paragraph{Username and password input}
+
+\begin{enumerate}
+
+\item{Test Case 1.2.1\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The interface that asked user to input a new username and password.
+					
+Input: Valid username and password.
+					
+Output: \st{Login} \textcolor{red}{Registration}  successfully. \textcolor{red}{Status Code: 200}
+					
+How test will be performed: The function that login with an exist username and a password will be run through the interface with certain inputs. After it has been run, check the result of this action to see if the user log in successfully or there is an error.
+
+\item{ \st{ Test Case 1.2.2} \\}
+
+\st{ Type: Functional, Dynamic, Manual.}
+					
+\st{Initial State: The interface that asked user to input a new username and password.}
+					
+\st{Input: Invalid username (Does not exist) and password.}
+					
+\st{Output: Fail to login the account, the username does not exist.}
+					
+\st{How test will be performed: The function that login with an exist username and a password will be run through the interface with certain inputs. After it has been run, check the result of this action to see if the user log in successfully or there is an error.}
+
+\item{Test Case 1.2.3\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The interface that asked user to input a new username and password.
+					
+Input: Valid username and invalid password (Wrong password).
+					
+Output: Fail to login the account, the password does not match. \textcolor{red}{Error code: 302}
+					
+How test will be performed: The function that login with an exist username and a password will be run through the interface with certain inputs. After it has been run, check the result of this action to see if the user log in successfully or there is an error.
+
+\end{enumerate}
+
+\subsubsection{Plagiarism check}
+Also refer to section 6.1.3 - 6.1.6
+
+\paragraph{Text input}
+
+\begin{enumerate}
+
+\item{Test Case 1.3.1\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The interface that asked user to input two pieces of text.
+					
+Input: Valid text 1 and text 2.
+					
+Output: Similarity check complete successfully and outputs the similarity ratio. \textcolor{red}{Status code: 200}
+					
+How test will be performed: The function that check for similarity ratio of two texts will be run through the interface with certain inputs. After it has been run, check the result of this action to see if the similarity check is completed successfully or there is an error.
+
+\item{ \st{ Test Case 1.3.2} \\}
+
+\st{Type: Functional, Dynamic, Manual.}
+					
+\st{Initial State: The interface that asked user to input two pieces of text.}
+					
+\st{Input: Invalid text 1 (Invalid characters) and valid text 2.}
+					
+\st{Output: Fail to complete similarity check and output the error message of "Invalid characters in text 1".}
+					
+\st{How test will be performed: The function that check for similarity ratio of two texts will be run through the interface with certain inputs. After it has been run, check the result of this action to see if the similarity check is completed successfully or there is an error.}
+
+\item{\st{ Test Case 1.3.3}\\}
+
+\st{Type: Functional, Dynamic, Manual.}
+					
+\st{Initial State: The interface that asked user to input two pieces of text.}
+					
+\st{Input: Valid text 1 and invalid text 2 (Invalid characters).}
+					
+\st{Output: Fail to complete similarity check and output the error message of "Invalid characters in text 2".}
+					
+\st{How test will be performed: The function that check for similarity ratio of two texts will be run through the interface with certain inputs. After it has been run, check the result of this action to see if the similarity check is completed successfully or there is an error.}
+
+\item{\st{ Test Case 1.3.4}\\}
+
+\st{ Type: Functional, Dynamic, Manual.}
+					
+\st{Initial State: The interface that asked user to input two pieces of text.}
+					
+\st{Input: Invalid text 1 (Invalid characters) and invalid text 2 (Invalid characters).}
+					
+\st{Output: Fail to complete similarity check and output the error message of "Invalid characters in both text 1 and text 2".}
+					
+\st{How test will be performed: The function that check for similarity ratio of two texts will be run through the interface with certain inputs. After it has been run, check the result of this action to see if the similarity check is completed successfully or there is an error.}
+
+\end{enumerate}
+
+\subsubsection{Token refill}
+Also refer to section 6.1.7 - 6.1.9
+
+\paragraph{Amount input}
+
+\begin{enumerate}
+
+\item{Test Case 1.4.1\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The interface that asked user to input the amount of tokens they would like to refill.
+					
+Input: Valid integer.
+					
+Output: Token refill completes successfully, and updates the current amount of tokens that user has. \textcolor{red}{Status code: 200}
+					
+How test will be performed: The function that refill tokens will be run through the interface with certain inputs. After it has been run, check the result of this action to see if the token refill is completed successfully and the token amount is updated or there is an error.
+
+\item{Test Case 1.4.2\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The interface that asked user to input the amount of tokens they would like to refill.
+					
+Input: Invalid \st{characters} \textcolor{red}{admin password} .
+					
+Output: Fail to refill the tokens due to invalid \st{amount input} \textcolor{red}{admin password}, and the current amount of tokens that user has does not change. \textcolor{red}{Error code: 302}
+					
+How test will be performed: The function that refill tokens will be run through the interface with certain inputs. After it has been run, check the result of this action to see if the token refill is completed successfully and the token amount is updated or there is an error.
+
+\end{enumerate}
+
+\subsection{Tests for Nonfunctional Requirements}
+The non-functional requirements of the system would be tested using user-testing, and through tracking time needed to call a resource in the Api.
+
+\subsubsection{Usability}
+		
+
+\begin{enumerate}
+
+\item{Test Case 2.1.1\\}
+
+Type: Functional, Dynamic, Manual 
+					
+Initial State: The interface ask the user to input two texts with 90 percent similarity.
+					
+Input/Condition: two texts with 90 percent similarity
+					
+Output/Result: 90 percent plagiarism
+					
+How test will be performed: User could input two texts which have 90 percent similarity. The actual result should match the one we expected. This test would also include a user testing technique testing how easy it is for a user to use this website and doing user-acceptance testing.
+					
+\item{Test Case 2.1.2\\}
+
+Type: Functional, Dynamic, Manual
+					
+Initial State: The interface ask the user to input two texts which are not English.
+					
+Input: Two Chinese texts
+					
+Output: failed to check the similarity
+					
+How test will be performed: User could input two texts which are not English, for example Chinese, to see if it works. We supposed that the software could only check the English texts.
+
+\end{enumerate}
+
+\subsubsection{Performance}
+To check performance of our website, each Api call would be timed and compared to each implementation thus optimizing the end result.
+\begin{enumerate}
+\item{Test Case 2.2.1\\}
+
+Type: Functional, Dynamic, \st{Manual} \textcolor{red}{Automated} 
+					
+Initial State: The interface ask the user to input two texts to check the similarity
+					
+Input/Condition: \st{Totally the same texts input} Two duplicate texts
+					
+Output/Result: \st{100 percent plagiarism} \textcolor{red}{Response time: should be less than 1 second}
+					
+How test will be performed: User could input two texts which are totally the same to see if \st{the result is correct. If the input data are the same, the expected result should be 100 percent plagiarism.} \textcolor{red}{the response time is less than 1 seconds or not.}
+					
+\item{Test Case 2.2.2\\}
+
+Type: Functional, Dynamic, \st{Manual} \textcolor{red}{Automated}
+					
+Initial State: The interface ask the user to input two texts to check the similarity
+					
+Input: \st{Totally the different texts input} \textcolor{red}{ Two different texts.}
+					
+Output: \st{0 percent plagiarism} \textcolor{red}{Response time should be less than 2 seconds}
+					
+How test will be performed: User could input two texts which are totally the different to see if \st{the result is correct. If the input data are different, the expected result should be 0 percent plagiarism.} \textcolor{red}{the response time is less than 2 seconds or not.}
+
+\item{\st{Test Case 2.2.3}\\}
+
+\st{Type: Functional, Dynamic, Manual}
+					
+\st{Initial State: The interface ask the user to input two texts to check the similarity}
+					
+\st{Input: two texts are partially similar}
+					
+\st{Output: the output should be a specific number according to the similarity check}
+					
+\st{How test will be performed: User could input two texts which are partially similar. The text could be simple enough so that the testers could calculate the similarity by themselves, and to see if the result is correct.}
+
+\item{ \textcolor{red}{\textbf{Test Case 2.2.4}}\\}
+
+\textcolor{red}{\textbf{Type:} Functional, Dynamic, Automated}
+					
+\textcolor{red}{\textbf{Initial State:} The interface ask the user to input username and password to register}
+					
+\textcolor{red}{\textbf{Input}: username and password}
+					
+\textcolor{red}{\textbf{Output}: Response time is less than 1 second.}
+					
+\textcolor{red}{\textbf{How test will be performed:} User could input username and password to see if the response time is less than 2 seconds or not.}
+
+\item{ \textcolor{red}{\textbf{Test Case 2.2.5}}\\}
+
+\textcolor{red}{\textbf{Type:} Functional, Dynamic, Automated}
+					
+\textcolor{red}{\textbf{Initial State:} The interface ask the user to input admin password and refill amount to refill available tokens}
+					
+\textcolor{red}{\textbf{Input}: admin password and refill amount}
+					
+\textcolor{red}{\textbf{Output}: Response time is less than 1 second.}
+					
+\textcolor{red}{\textbf{How test will be performed:} User could input admin password and refill amount to see if the response time is less than 2 seconds or not.}
+
+
+\end{enumerate}
+
+\subsection{Traceability Between Test Cases and Requirements}
+
+\begin{table}[H]
+\centering
+\caption{\bf Traceability Table}
+\label{tab:my-table}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|}
+\hline
+\bf \textbf{Requirements}                                                                       & \bf \textbf{Test cases}              \\ \hline
+FR1: The website shall allow user registration using username and password.        & Test case 1.1.1, 1.1.2,1.1.7, \st{1.1.3, 1.14, 1.1.6} 6.1.1 - 6.1.2\\ \hline
+FR2: The website shall allow user to login using unique username and password.     & Test case 1.2.1, 1.2.3, \st{1.2.2} \\ \hline
+FR4: User shall be able to enter the two texts it wants to compare for plagiarism. & Test case 1.3.1 \st{1.1.2- 1.3.4} , 6.1.3 - 6.1.6\\ \hline
+FR7: The website shall allow a user to refill his tokens whenever required.        & Test case 1.4.1 - 1.4.2, 6.1.7 - 6.1.9 \\ \hline
+NFR2.1: All text displayed by interface shall in English with Canadian spelling.   & Test case 2.1.1 - 2.1.2 \\ \hline
+NFR3: The result shall be displayed immediately after user submits the text.       & Test case 2.2.1, \st{ 2.2.3}, \textcolor{red}{2.2.4, 2.2.5} \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+\section{Tests for Proof of Concept}
+\textbf{Issue:} How to get the website up live?   \\
+\textbf{Solution:}  By buying a domain name and thus giving a placeholder online that could be used later to host our fully functional website. http://plagiarismcheck-com.stackstaging.com \\
+
+\textbf{Issue:} How to get the Api online that could be called through the website? \\
+\textbf{Solution:} This got resolved by deploying the Api on AWS EC2 instance that is available online round the clock everyday. ec2-18-224-246-224.us-east-2.compute.amazonaws.com:8000/  \\
+
+
+\subsection{Token payment method}
+		
+\paragraph{Payment method selection and information input}
+
+\begin{enumerate}
+
+\item{Test case 4.1\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The interface that asked user to select payment method.
+					
+Input: The selection of one payment method in the list.
+					
+Output: Return a interface with selected payment method and the information it requires.
+					
+How test will be performed: The function that select a payment method will be run through the interface with certain inputs. After it has been run, check the result of this action to see if the payment information it asked is corresponding to the selected one. (eg. When user select credit card as the payment method, the interface will ask for the credit card information instead of Paypal account.)
+					
+\item{Test case 4.2\\}
+
+Type: Functional, Dynamic, Manual.
+					
+Initial State: The interface that asked user to enter payment information.
+					
+Input: The correct information of a credit card.
+					
+Output: The payment is completed successfully, the tokens are successfully purchased and added into user's account.
+					
+How test will be performed: The function that input payment information will be run through the interface with certain inputs. After it has been run, check the result of this action to see if the payment is completed successfully and if the current amount of tokens is updated.
+
+\end{enumerate}
+
+
+	
+\section{Comparison to Existing Implementation}	
+n/a
+				
+\section{Unit Testing Plan}
+The PyUnit and Mocha framework will be used to do unit testing for the project's backend.
+		
+\subsection{Unit testing of internal functions}
+In order to create unit tests for the internal functions, all the methods that return value can be tested. This will involve giving required inputs to the methods and checking the output.Based on the input and the expected output from the method, a number of unit tests can be created. \\*
+Unit tests will include tests that include normal case input as well as boundary and edge cases that supposedly would throw exceptions. We would not be importing any stubs or drivers for testing. Anything that needs to be imported to either implement a functionality or test a function would be already imported in the individual classes. \\
+We would be using coverage metrics to determine how much of our code has been covered. Our goal remains to cover maximum portion of the code(more than 80\%) to ensure the adequate tests for all functions.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{{Registration Testing}}
+This will be a unit test using PyUnit (Mocha) to validate correctness of register. \\
+\\
+\textbf{Test Factors Involved:} Correctness \\
+\\
+\textbf{Initial State: } User is on Register page of the website \\
+\\
+\textbf{Inputs: } username, password \\
+\\
+\textbf{Outputs:} status code: 200 OK \\*
+                  message: User has been successfully registered \\
+\\
+\textbf{Schedule:} This test regards the registration of the user and therefore will be necessary for the Final Demonstration 1 \\
+\\
+\textbf{Methodology: } This test will be conducted by checking the status code and also if the user is registered for the Api after calling the Register resource in the Restful Backend. \\
+\\
+\textbf{Tests For:} This test validates section \textbf{FR1}, of SRS document.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{{Registration Fail Testing}}
+This will be a unit test using PyUnit (Mocha) to validate correctness of register. \\
+\\
+\textbf{Test Factors Involved:} Correctness \\
+\\
+\textbf{Initial State: } User is on Register page of the website \\
+\\
+\textbf{Inputs: } username, password \\
+\\
+\textbf{Outputs:} status code: 301 User exists \\*
+                  message: A user already exists with this username \\
+\\
+\textbf{Schedule:} This test regards the registration of the user and therefore will be necessary for the Final Demonstration 1 \\
+\\
+\textbf{Methodology: } This test will be conducted by checking the status code and message after calling the Register resource in the Restful Backend. \\
+\\
+\textbf{Tests For:} This test validates section \textbf{FR1}, of SRS document.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{{Detect Testing}}
+This will be a unit test using PyUnit (Mocha) to validate correctness of Detect resource. \\
+\\
+\textbf{Test Factors Involved:} Correctness \\
+\\
+\textbf{Initial State: } User is on \textit{Detect} page of the website \\
+\\
+\textbf{Inputs: } username, password, two string texts \\
+\\
+\textbf{Outputs:} status code: 200 OK \\*
+                  message: Similarity ratio calculated \\
+                  similarity ratio: a decimal number \\
+\\
+\textbf{Schedule:} This test regards the calculation of the similarity between the two texts and therefore will be necessary for the Final Demonstration 1 \\
+\\
+\textbf{Methodology: } This test will be conducted by checking the status code and the similarity ratio after calling the Detect resource in the Restful Backend. \\
+\\
+\textbf{Tests For:} This test validates section \textbf{FR4}, of SRS document.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{{Detect Invalid user Fail Testing}}
+This will be a unit test using PyUnit (Mocha) to validate correctness of Detect resource. \\
+\\
+\textbf{Test Factors Involved:} Correctness \\
+\\
+\textbf{Initial State: } User is on \textit{Detect} page of the website \\
+\\
+\textbf{Inputs: } username, password, two string texts \\
+\\
+\textbf{Outputs:} status code: 301 \\*
+                  message: User does not exist \\
+\\
+\textbf{Schedule:} This test regards the calculation of the similarity between the two texts and therefore will be necessary for the Final Demonstration 1 \\
+\\
+\textbf{Methodology: } This test will be conducted by checking the status code and the message after calling the Detect resource in the Restful Backend. \\
+\\
+\textbf{Tests For:} This test validates section \textbf{FR4}, of SRS document.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{{Detect Wrong password Fail Testing}}
+This will be a unit test using PyUnit (Mocha) to validate correctness of Detect resource. \\
+\\
+\textbf{Test Factors Involved:} Correctness \\
+\\
+\textbf{Initial State: } User is on \textit{Detect} page of the website \\
+\\
+\textbf{Inputs: } username, password, two string texts \\
+\\
+\textbf{Outputs:} status code: 302 \\*
+                  message: Invalid password \\
+\\
+\textbf{Schedule:} This test regards the calculation of the similarity between the two texts and therefore will be necessary for the Final Demonstration 1 \\
+\\
+\textbf{Methodology: } This test will be conducted by checking the status code and the message after calling the Detect resource in the Restful Backend. \\
+\\
+\textbf{Tests For:} This test validates section \textbf{FR4}, of SRS document.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{{Detect No Tokens Fail Testing}}
+This will be a unit test using PyUnit (Mocha) to validate correctness of Detect resource. \\
+\\
+\textbf{Test Factors Involved:} Correctness \\
+\\
+\textbf{Initial State: } User is on \textit{Detect} page of the website \\
+\\
+\textbf{Inputs: } username, password, two string texts \\
+\\
+\textbf{Outputs:} status code: 303 \\*
+                  message: Out of tokens, please refill \\
+\\
+\textbf{Schedule:} This test regards the calculation of the similarity between the two texts and therefore will be necessary for the Final Demonstration 1 \\
+\\
+\textbf{Methodology: } This test will be conducted by checking the status code and the message after calling the Detect resource in the Restful Backend. \\
+\\
+\textbf{Tests For:} This test validates section \textbf{FR4}, of SRS document.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{{Refill Testing}}
+This will be a unit test using PyUnit (Mocha) to validate correctness of Refill resource. \\
+\\
+\textbf{Test Factors Involved:} Correctness \\
+\\
+\textbf{Initial State: } User is on \textit{Refill} page of the website \\
+\\
+\textbf{Inputs: } username, password, refill amount \\
+\\
+\textbf{Outputs:} status code: 200 OK \\*
+                  message: Tokens refilled successfully \\
+\\
+\textbf{Schedule:} This test regards the refill of tokens which is required to use the Api and therefore will be necessary for the Final Demonstration 1 \\
+\\
+\textbf{Methodology: } This test will be conducted by checking the status code and the message after calling the Refill resource in the Restful Backend. \\
+\\
+\textbf{Tests For:} This test validates section \textbf{FR7}, of SRS document.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{{Refill Invalid user Fail Testing}}
+This will be a unit test using PyUnit (Mocha) to validate correctness of Detect resource. \\
+\\
+\textbf{Test Factors Involved:} Correctness \\
+\\
+\textbf{Initial State: } User is on \textit{Refill} page of the website \\
+\\
+\textbf{Inputs: } username, password, refill amount \\
+\\
+\textbf{Outputs:} status code: 301 \\*
+                  message: User does not exist \\
+\\
+\textbf{Schedule:} This test regards the refill of tokens which is required to use the Api and therefore will be necessary for the Final Demonstration 1 \\
+\\
+\textbf{Methodology: } This test will be conducted by checking the status code and the message after calling the Refill resource in the Restful Backend. \\
+\\
+\textbf{Tests For:} This test validates section \textbf{FR7}, of SRS document.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{{Refill Invalid password Fail Testing}}
+This will be a unit test using PyUnit (Mocha) to validate correctness of Detect resource. \\
+\\
+\textbf{Test Factors Involved:} Correctness \\
+\\
+\textbf{Initial State: } User is on \textit{Refill} page of the website \\
+\\
+\textbf{Inputs: } username, password, refill amount \\
+\\
+\textbf{Outputs:} status code: 302 \\*
+                  message: Invalid Admin password \\
+\\
+\textbf{Schedule:} This test regards the refill of tokens which is required to use the Api and therefore will be necessary for the Final Demonstration 1 \\
+\\
+\textbf{Methodology: } This test will be conducted by checking the status code and the message after calling the Refill resource in the Restful Backend. \\
+\\
+\textbf{Tests For:} This test validates section \textbf{FR7}, of SRS document.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+		
+\subsection{Unit testing of output files}	
+Our project does not generate any output files and thus this section is not applicable to our project.
+
+\bibliographystyle{plainnat}
+
+\bibliography{SRS}
+
+\newpage
+
+\section{Appendix}\
+
+\subsection{Symbolic Parameters}
+
+\subsubsection{Status codes}
+200 : This status code is raised if the API call is successful and Api performs as desired \\
+301 : This status code is raised when registering a user twice or if the username does not match\\
+302 : This status code is raised when the input password is invalid/wrong\\
+303 : This status code is raised when user runs out of tokens needed to call the Api\\
+
+\subsection{Usability Survey Questions?}
+When a user has finished using the website and clicks the close button, the website would prompt a survey to be filled to gain feedback on the loose ends of the website and improve on it. \\
+\textbf{Questions :} 
+
+\begin{enumerate}
+
+\item How likely are you to recommend this website to a friend? 
+\item Are you having trouble finding anything on this website?  
+\item Is there anything missing on the page? 
+\item How did you experience compared to your expectation? 
+\item How easy was it to use this website? Did you have any problems? 
+\item What is the feature you wish our website had? 
+\item Is there any features you do not find helpful?
+
+\end{enumerate}
+
+
+\end{document}

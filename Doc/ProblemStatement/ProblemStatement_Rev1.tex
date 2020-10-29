@@ -1,0 +1,50 @@
+\documentclass{article}
+
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage[dvipsnames]{xcolor}
+
+\usepackage[round]{natbib}
+\title{SE 3XA3: Problem Statement: Rev 1\\\textbf{Plagiarism Check}}
+
+\author{Team 310, MXQ Squad
+		\\ Mrinal Kumar Tiwari -- tiwarim
+		\\ Qifeng Xu -- xuq14
+		\\ Xu Wang --  wangx147
+}
+
+\date{}
+
+
+\begin{document}
+\maketitle
+\newpage
+\begin{table}[hp]
+\caption{Revision History} \label{TblRevisionHistory}
+\begin{tabularx}{\textwidth}{llX}
+\toprule
+\textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
+\midrule
+Jan 23, 2020 & Mrinal, Qifeng, Xu & Added the problem statement: \textcolor{red}{Rev 0} \\
+\textcolor{red}{April 6} & \textcolor{red}{Mrinal, Xu Wang}  & \textcolor{red}{Update the problem statement:Rev 1} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\newpage
+
+\maketitle
+
+\subsection*{What problem are you trying to solve?}
+\newcommand*\apos{\textsc{\char13}}
+Every 1 in \textcolor{red}{ 5 student collaborate in some kind of assessment and 1 in 15 }  come across a time when they are accused of Plagiarism. In most cases, the students are unaware of the fact that their thesis, assignments or any other text related document is similar to other documents either on internet or similar to document of some other student. Our original application, Plagiarism check uses Natural Language Processing model to calculate similarity ratio between two documents giving a hit for Plagiarism. \\
+
+The original application, Plagiarism Check does not provide a user interface thus a user needs to use a third party HTTP application (Postman) to check the similarity in their document. We solve this user problem by making a dynamic interactive website that would allow user to login using username and password and input two texts on the website and click submit to get the similarity ratio.
+
+\subsection*{Why is this an important problem?}
+Statistics show that users prefer to use a software that is more user friendly and interactive than a software that is better but lacks an easy user interface. Currently, a user needs to have understanding of JSON, and GET and POST methods to use the original API using Postman. Our major shareholders are high school and university students from all majors. A majority of our stakeholders would have little to no knowledge of REST API calls and thus using the original software over HTTP would be hard for them. Our proposed solution provides abstraction. With our dynamic website, the only input we would need from user is the two texts and thus providing more friendly and agile environment for use.
+
+\subsection*{What is the context of the problem you are solving?}
+The stakeholders of our software are mostly the high school students, teachers, university students and professors. Students could use it for their assignments and essay to see the similarity of the resource they referred to. On the other hand, it could be used to help teachers check the percentage of plagiarism \textcolor{red}{in the submitted assignments} . This software should be a great tool for the groups of people who are doing researches with plenty of referenced academic material either from the internet or books. Therefore, it will be used frequently in universities and research institutions. It is also a software that can run both on desktop and portable devices like cell phones and tablets as long as the user has the correct URL of the website \textcolor{red}{and a web browser with internet access} . 
+
+\end{document}

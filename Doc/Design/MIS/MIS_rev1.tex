@@ -1,0 +1,384 @@
+\documentclass[12,english]{article}
+\usepackage[letterpaper, portrait, margin=1in]{geometry}
+
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+\usepackage{babel}
+\usepackage{textcomp}
+\usepackage{titlesec}
+\setcounter{secnumdepth}{4}
+\usepackage{hyperref}
+\usepackage[normalem]{ulem}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{placeins}
+\usepackage{multirow}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{soul}
+
+\usepackage[usenames, dvipsnames]{color}
+
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+      colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=black,          % color of internal links (change box color with linkbordercolor)
+    citecolor=green,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\title{SE 3XA3: Modulule Interface Specification\\Plagiarism Check}
+
+\author{Team 310, MXQ Gang
+        \\ Mrinal Tiwari, tiwarim
+		\\ Qifeng Xu, xuq14
+		\\ Xu Wang, wangx147
+}
+
+
+\date{\today}
+
+\begin{document}
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+
+
+
+
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	
+\section{MIS of \boldtf{System Utilities}}
+		\subsection{Interface Syntax}
+			\subsubsection{Exported Access Programs}
+				\begin{tabular}[pos]{|c|c|c|c|}
+					
+					\hline
+					%	\label
+					\textbf{Name}& \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
+					UserExists & string & boolean & - \\ \hline
+					VerifyPW & string, string & boolean & -\\ \hline
+					CountTokens & string & integer & -\\ \hline
+					
+				\end{tabular}
+				
+		\subsection{Interface Semantics}
+			\subsubsection{State Variables}
+			Not applicable
+			
+			\subsubsection{Environmental Variables}
+			Not Applicable
+			
+			\subsubsection{Assumptions}
+        `   There will be no exceptions raised in this module as Utils module handles the exceptions when calling this module.
+        
+			\subsubsection{Access Program Semantics}
+			UserExists(username):
+			
+			Input: Username as string
+			
+			Transition: Searches for the username in the database
+			
+			Output: Boolean True or False
+			
+			Exception: none\\
+			\\
+			
+			VerifyPW(username, password):
+			
+			Input: Username as string, password as string
+			
+			Transition: Compares the hashed password stored in the database to the password given as input
+			
+			Output: Boolean True or False
+			
+			Exception: none\\
+			\\
+			
+			CountTokens(username):
+			
+			Input: Username as string
+			
+			Transition: Searches for number of tokens stored in the database for that user.
+			
+			Output: Returns the number of tokens as integer
+			
+			Exception: none\\
+			\\
+			
+			
+		%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+			
+			
+\section{MIS of \boldtf{Register Resource}}
+		\subsection{Interface Syntax}
+			\subsubsection{Exported Access Programs}
+				\begin{tabular}[pos]{|c|c|c|c|c|}
+					
+					\hline
+					%	\label
+					\textbf{Name}& \textbf{URL} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
+					post & \slash register & json & json & 301 \\ \hline
+					
+				\end{tabular}
+				
+		\subsection{Interface Semantics}
+			\subsubsection{State Variables}
+			namepass: Json input containing the name and password of the user to register.  \\*
+			name: user's name as string extracted from the Json.   \\*
+			password: user's password as string extracted from the Json    \\*
+			
+			\subsubsection{Environmental Variables}
+			Not Applicable
+			
+			\subsubsection{Assumptions}
+           It is assumed that user would not send a invalid json like json containing invalid number of inputs.
+        
+			\subsubsection{Access Program Semantics}
+			post(Resource):
+			
+			Input: Resource as json that is passed over the register URL of Restful API
+			
+			Transition: Updates the database with the new user credential
+			
+			Output: retJson as json that contains the reply message and status code
+			
+			Exception: 301 - user already exists\\
+			\\
+			
+			
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+			
+			
+\section{MIS of \boldtf{Detect Resource}}
+		\subsection{Interface Syntax}
+			\subsubsection{Exported Access Programs}
+				\begin{tabular}[pos]{|c|c|c|c|c|}
+					
+					\hline
+					%	\label
+					\textbf{Name}& \textbf{URL} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
+					post & \slash detect & json & json & 301, 302, 303 \\ \hline
+					
+				\end{tabular}
+				
+		\subsection{Interface Semantics}
+			\subsubsection{State Variables}
+			namepassref : Json input containing username, admin password and refill amount. \\* 
+			name: user's name as string extracted from the Json.   \\*
+			\textcolor{red}{password: User's password as string extracted from the Json} \\*
+			\textcolor{red}{text1: First text as string extracted from the json} \\*
+			\textcolor{red}{text2: Second text as string extracted from the json} \\*
+			\st{admin\_password: admin password as string extracted from the Json }   \\*
+			\st{refill\_amt: the amount of tokens to refill as integer extracted from the Json}  \\*
+			\subsubsection{Environmental Variables}
+			Not Applicable
+			
+			\subsubsection{Assumptions}
+           It is assumed that user would not send a invalid json containing invalid number or type of inputs.
+        
+			\subsubsection{Access Program Semantics}
+			post(Resource):
+			
+			Input: Resource as json that is passed over the refill URL of Restful API
+			
+			Transition: Adds the refill amount to the existing number of tokens
+			
+			Output: retJson as json that contains the reply message and status code
+			
+			Exception: 301 - invalid user, 302 - invalid password, 303 - out of tokens\\
+			\\
+			
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+			
+	\section{MIS of \boldtf{Refill Resource}}
+		\subsection{Interface Syntax}
+			\subsubsection{Exported Access Programs}
+				\begin{tabular}[pos]{|c|c|c|c|c|}
+					
+					\hline
+					%	\label
+					\textbf{Name}& \textbf{URL} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
+					post & \slash refill & json & json & 301,302, 304 \\ \hline
+					
+				\end{tabular}
+				
+		\subsection{Interface Semantics}
+			\subsubsection{State Variables}
+			namepass: Json input containing the name and password of the user to register. \\*
+			\textcolor{red}{admin\_password: admin password as string extracted from the Json}.  \\*
+			\textcolor{red}{refill\_amt: the amount of tokens to refill as integer extracted from the Json}. 
+			
+			\subsubsection{Environmental Variables}
+			Not Applicable
+			
+			\subsubsection{Assumptions}
+           It is assumed that user would not send a invalid json like json containing invalid number of inputs.
+        
+			\subsubsection{Access Program Semantics}
+			post(Resource):
+			
+			Input: Resource as json that is passed over the register URL of Restful API
+			
+			Transition: Updates the database with the new user credential
+			
+			Output: retJson as json that contains the reply message and status code
+			
+			Exception: 301 - invalid user, 302 - invalid password, 304 - wrong admin password\\
+			\\
+			
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+			
+			
+	\section{MIS of \boldtf{Integration Module}}
+		\subsection{Interface Syntax}
+			\subsubsection{Exported Access Programs}
+				\begin{tabular}[pos]{|c|c|c|c|}
+					
+					\hline
+					%	\label
+					\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\ \hline
+					
+					\textcolor{red}{createCorsrequest} & \textcolor{red}{method}, \textcolor{red}{url} & \textcolor{red}{CorsRequest} & \textcolor{red}{Error 404} \\ \hline
+					\textcolor{red}{makeCorsRequestRegister} & \textcolor{red}{string, string} & \textcolor{red}{-} &  \textcolor{red}{Error 500} \\ \hline
+					\textcolor{red}{Registersend} & \textcolor{red}{-} & \textcolor{red}{-} &  \textcolor{red}{-} \\ \hline
+					\textcolor{red}{makeCorsRequestCheck} & \textcolor{red}{string, string, string, string} & \textcolor{red}{-} &  \textcolor{red}{Error 500} \\ \hline
+					\textcolor{red}{Checksend} & \textcolor{red}{-} & \textcolor{red}{-} &  \textcolor{red}{-} \\ \hline
+					\textcolor{red}{makeCorsRequestRefill} & \textcolor{red}{string, string, int} & \textcolor{red}{-} &  \textcolor{red}{Error 500} \\ \hline
+					\textcolor{red}{Refillsend} & \textcolor{red}{-} & \textcolor{red}{-} &  \textcolor{red}{-} \\ \hline
+					
+					
+				\end{tabular}
+				
+		\subsection{Interface Semantics}
+			\subsubsection{State Variables}
+			Not applicable
+			
+			\subsubsection{Environmental Variables}
+			\st{Not Applicable} \\*
+			\textcolor{red}{username : stores username entered by user in the textbox using keyboard}  \\*
+			\textcolor{red}{password : stores password entered by user in the textbox using keyboard}  \\*
+			\textcolor{red}{text1 : stores first text entered by user in the textbox using keyboard}  \\*
+			\textcolor{red}{text2 : stores second entered by user in the textbox using keyboard}  \\*
+			\textcolor{red}{adminPassword : stores admin password entered by user in the textbox using keyboard}  \\*
+			\textcolor{red}{Submit : responds to click made by user}  \\*
+			
+			\subsubsection{Assumptions}
+			\textcolor{red}{It is assumed that the backend is running and is properly connected through Amazon Web Services.} \\*
+           \st{There will be no exceptions raised in this module as Utils module handles the exceptions when calling this module.} 
+        
+        
+			\subsubsection{Access Program Semantics}
+			\st{
+			UserExists(username):
+
+			Input: Username as string
+			
+			Transition: Searches for the username in the database
+			
+			Output: Boolean True or False
+			
+			Exception: none\\
+			\\
+			
+			VerifyPW(username, password):
+			
+			Input: Username as string, password as string
+			
+			Transition: Compares the hashed password stored in the database to the password given as input
+			
+			Output: Boolean True or False
+			
+			Exception: none\\
+			\\
+			
+			CountTokens(username):
+			
+			Input: Username as string
+			
+			Transition: Searches for number of tokens stored in the database for that user.
+			
+			Output: Returns the number of tokens as integer
+			
+			Exception: none\\ }
+			
+			\textcolor{red}{\textbf{createCorsRequest}(method, url):} \\*
+			\textcolor{red}{Input: method in terms of GET or POSt, url as URL of the REST API} \\*
+			\textcolor{red}{Transition: creates a HTTP Cors request of the url on the preferred method} \\*
+			\textcolor{red}{ Output: Returns the Cors request } \\*
+			\textcolor{red}{Exception: Error 404 URL not found } 
+			\\
+			
+			\textcolor{red}{\textbf{makeCorsRequestRegister}(uname, pass):} \\*
+			\textcolor{red}{Input: username as string, password as string} \\*
+			\textcolor{red}{Transition: Makes a HTTP request call of the url with username and password} \\*
+			\textcolor{red}{ Output: - } \\*
+			\textcolor{red}{Exception: Error 500 Internal server error } 
+			\\
+			
+			\textcolor{red}{\textbf{RegisterSend}():} \\*
+			\textcolor{red}{Input: -} \\*
+			\textcolor{red}{Transition: accepts the username and password from the text box} \\*
+			\textcolor{red}{ Output: - } \\*
+			\textcolor{red}{Exception:-  } 
+			\\
+			
+			\textcolor{red}{\textbf{makeCorsRequestCheck}(uname, pass, text1, text2):} \\*
+			\textcolor{red}{Input: username as string, password as string, text1 as string, text2 as string} \\*
+			\textcolor{red}{Transition: Makes a HTTP request call of the url with username, password, text and text2} \\*
+			\textcolor{red}{ Output: - } \\*
+			\textcolor{red}{Exception: Error 500 Internal server error } 
+			\\
+			
+			\textcolor{red}{\textbf{CheckSend}():} \\*
+			\textcolor{red}{Input: -} \\*
+			\textcolor{red}{Transition: accepts the username, password, text1 and text2 from the text box} \\*
+			\textcolor{red}{ Output: - } \\*
+			\textcolor{red}{Exception:-  } 
+			\\
+			
+			\textcolor{red}{\textbf{makeCorsRequestRefill}(uname, adminPass, refillAmt):} \\*
+			\textcolor{red}{Input: username as string, admin password as string, refill amount as int} \\*
+			\textcolor{red}{Transition: Makes a HTTP request call of the url with username, admin password and refill amount} \\*
+			\textcolor{red}{ Output: - } \\*
+			\textcolor{red}{Exception: Error 500 Internal server error } 
+			\\
+			
+			\textcolor{red}{\textbf{RefillSend}():} \\*
+			\textcolor{red}{Input: -} \\*
+			\textcolor{red}{Transition: accepts the username, admin password and refill amount from the text box} \\*
+			\textcolor{red}{ Output: - } \\*
+			\textcolor{red}{Exception:-  } 
+			
+			\\
+			
+			%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+			
+			
+			
+	\newpage	
+	\section{Major Revision History}
+\begin{table}[!htbp]
+	\begin{tabular}{|l|l|}
+		\toprule
+		Date & Revision\\ \hline
+		February 3, 2020 & Rough draft of sections\\ \hline
+		February 15, 2019 & Revised sections \\ \hline
+		February 16, 2019 & Revision 0 complete\\ \hline
+		March 12, 2020 & MIS, Module Guide, Requirements Document, Test Plan, and Test Report revision 0 \\ \hline
+		\textcolor{red}{April 6, 2020} & \textcolor{red}{Updated sections, updated Integration Module} \\ \hline
+		
+	\end{tabular}
+\end{table}
+			
+
+
+			
+\end{document}

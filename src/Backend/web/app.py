@@ -1,5 +1,7 @@
 # importing libraries
-from utils import *
+from Register import *
+from Detect import *
+from Refill import *
 
 app = Flask(__name__)
 api = Api(app) # initialize that this app would be an api
@@ -10,7 +12,7 @@ api.add_resource(Detect, "/detect")
 api.add_resource(Refill, "/refill")
 
 if __name__ == "__main__":
-    app.run(debug=True,host="0.0.0.0", port=8000)
+    app.run(host="0.0.0.0")
 
 
 
