@@ -1,4 +1,3 @@
-# 3XA3 Project
 # Plagiarism Check
 
 This is a webpage based project that uses pretrained Natural Language Procesing model called Spacy to compute pairwise similarity ratio between two documents. This allows user to register for the API using a unique username and password. With each registration, a user gets 6 free tokens. User calls the API giving his username, password and the two documents as string and gets back the similarity ratio. Each transcation costs the user 1 token and he has option to refill the tokens by paying for it. When Admin receives tghe pay, he call the API giving username, Admin password and the refill amount. The user now has sum of existing tokens and the refill amount. The API is hosted on AWS with host url "ec2-3-134-112-214.us-east-2.compute.amazonaws.com at port 800". You can also access the live webpage at "http://plagiarismcheck-com.stackstaging.com"
